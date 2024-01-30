@@ -1,4 +1,7 @@
-local general_mappings = {
+local M = {}
+
+local mappings = {}
+mappings.general = {
   n = {
     -- moving around panes
     ["<C-h>"] = {"<C-w>h"},
@@ -29,8 +32,68 @@ local general_mappings = {
   },
 }
 
-local function set_mappings(mappings)
-  for mode, mode_values in pairs(mappings) do
+mappings.lspconfig = {
+  n = {
+    ["gd"] = {
+      function()
+        vim.lsp.buf.definition()
+      end,
+      "LSP definition",
+    },
+
+    ["gr"] = {
+      function()
+        require("telescope.builtin").lsp_references()
+      end,
+      "lsp references",
+    },
+
+    ["K"] = {
+      function()
+        vim.lsp.buf.hover()
+      end,
+      "LSP hover",
+    },
+
+    ["<leader>lr"] = {
+      function()
+        require("nvchad.renamer").open()
+      end,
+      "[L]SP [r]ename",
+    },
+
+    ["<leader>la"] = {
+      function()
+        vim.lsp.buf.code_action()
+      end,
+      "[L]SP code [a]ction",
+    },
+
+    ["<leader>d"] = {
+      function()
+        vim.diagnostic.open_float { border = "rounded" }
+      end,
+      "Floating [d]iagnostic",
+    },
+
+    ["[d"] = {
+      function()
+        vim.diagnostic.goto_prev { float = { border = "rounded" } }
+      end,
+      "Goto prev",
+    },
+
+    ["]d"] = {
+      function()
+        vim.diagnostic.goto_next { float = { border = "rounded" } }
+      end,
+      "Goto next",
+    }
+  }
+}
+
+M.load = function (sectionName)
+  for mode, mode_values in pairs(mappings[sectionName]) do
     for keybind, mapping_info in pairs(mode_values) do
       local opts = mapping_info.opts or {}
       opts.desc = mapping_info[2]
@@ -40,4 +103,4 @@ local function set_mappings(mappings)
   end
 end
 
-set_mappings(general_mappings)
+return M

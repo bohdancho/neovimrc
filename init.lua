@@ -22,5 +22,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 
-require("lazy").setup("plugins", { defaults = { lazy = false } })
+require("lazy").setup("plugins")
 
+require("mappings").load("general")
+--local general_mappings = require("mappings").general
+--require("utils").set_mappings(general_mappings)

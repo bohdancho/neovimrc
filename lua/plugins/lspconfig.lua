@@ -6,7 +6,10 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "yioneko/nvim-vtsls",
     },
+    lazy = false,
     config = function()
+      require("mappings").load("lspconfig")
+
       local lspconfig = require "lspconfig"
       require("lspconfig.configs").vtsls = require("vtsls").lspconfig -- set default server config, optional but recommended
 
@@ -26,7 +29,6 @@ return {
               library = {
                 [vim.fn.expand "$VIMRUNTIME/lua"] = true,
                 [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-                [vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types"] = true,
                 [vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy"] = true,
               },
               maxPreload = 100000,
