@@ -1,36 +1,36 @@
 return {
-  "nvim-treesitter/nvim-treesitter",
-  lazy = false,
-  build = ":TSUpdate",
-  config = function ()
-    local configs = require("nvim-treesitter.configs")
+    "nvim-treesitter/nvim-treesitter",
+    lazy = false,
+    build = ":TSUpdate",
+    config = function()
+        local configs = require "nvim-treesitter.configs"
 
-    configs.setup({
-      ensure_installed = {
-        -- defaults
-        "lua",
-        "vimdoc",
+        configs.setup {
+            ensure_installed = {
+                -- defaults
+                "lua",
+                "vimdoc",
 
-        -- web dev
-        "html",
-        "css",
-        "javascript",
-        "typescript",
-        "tsx",
-        "json",
-        "php",
+                -- web dev
+                "html",
+                "css",
+                "javascript",
+                "typescript",
+                "tsx",
+                "json",
+                "php",
 
-        "make",
-        "markdown",
-        "bash",
-      },
-      highlight = {
-        enable = true,
-        disable = { "lua" },
-      },
-      indent = {
-        enable = true
-      }
-    })
-  end
+                "make",
+                "markdown",
+                "bash",
+            },
+            highlight = {
+                enable = true,
+                disable = { "lua" },
+            },
+            indent = {
+                enable = true,
+            },
+        }
+    end,
 }
