@@ -6,24 +6,7 @@ return {
         local configs = require "nvim-treesitter.configs"
 
         configs.setup {
-            ensure_installed = {
-                -- defaults
-                "lua",
-                "vimdoc",
-
-                -- web dev
-                "html",
-                "css",
-                "javascript",
-                "typescript",
-                "tsx",
-                "json",
-                "php",
-
-                "make",
-                "markdown",
-                "bash",
-            },
+            auto_install = true,
             highlight = {
                 enable = true,
                 disable = { "lua" },
