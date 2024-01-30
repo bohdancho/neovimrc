@@ -1,6 +1,10 @@
 return {
   'nvim-telescope/telescope.nvim', tag = '0.1.5',
-  dependencies = { 'nvim-lua/plenary.nvim' },
+  dependencies = { 
+    'nvim-lua/plenary.nvim',
+    "nvim-telescope/telescope-ui-select.nvim",
+  },
+  lazy = true,
   keys = {
     {"<leader>ff", "<cmd> Telescope find_files <CR>", desc = "Find files" },
     {"<leader>fa", "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", desc = "Find all" },
@@ -12,5 +16,25 @@ return {
     -- git
     {"<leader>gc", "<cmd> Telescope git_commits <CR>", desc = "[G]it [c]ommits" },
     {"<leader>gs", "<cmd> Telescope git_status <CR>", desc = "[G]it [s]tatus" },
-  }
+  },
+  config = function ()
+    require('telescope').setup({
+      defaults = {
+        preview = {
+          treesitter = { disable = { "lua" } },
+        },
+        mappings = {
+          i = {
+            ["<C-j>"] = require("telescope.actions").move_selection_next,
+            ["<C-k>"] = require("telescope.actions").move_selection_previous,
+            ["<C-j>"] = require("telescope.actions").move_selection_next,
+            ["<C-k>"] = require("telescope.actions").move_selection_previous,
+          },
+        },
+        layout_config = {
+          preview_width = 60
+        },
+      },
+    })
+  end
 }

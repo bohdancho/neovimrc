@@ -18,13 +18,16 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " "
 
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", { defaults = { lazy = false } })
 
+-- moving around panes
 vim.keymap.set('n', "<C-h>", "<C-w>h")
 vim.keymap.set('n', "<C-l>", "<C-w>l")
 vim.keymap.set('n', "<C-j>", "<C-w>j")
 vim.keymap.set('n', "<C-k>", "<C-w>k")
 
+vim.keymap.set('n', "<C-s>", "<cmd> w <CR>", {desc = "Save file"})
+
 vim.opt.relativenumber = true
 vim.opt.clipboard = "unnamed"
-vim.cmd.colorscheme "catppuccin"
+vim.opt.fillchars = {eob = " "}
