@@ -1,7 +1,12 @@
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=2")
-vim.cmd("set softtabstop=2")
-vim.cmd("set shiftwidth=2")
+vim.opt.expandtab = true
+vim.opt.tabstop=2
+vim.opt.softtabstop=2
+vim.opt.shiftwidth=2
+vim.opt.relativenumber = true
+vim.opt.clipboard = "unnamed"
+vim.opt.fillchars = {eob = " "}
+vim.opt.formatoptions:remove { "c", "r", "o" }
+vim.g.mapleader = " "
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -16,18 +21,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.mapleader = " "
 
 require("lazy").setup("plugins", { defaults = { lazy = false } })
 
--- moving around panes
-vim.keymap.set('n', "<C-h>", "<C-w>h")
-vim.keymap.set('n', "<C-l>", "<C-w>l")
-vim.keymap.set('n', "<C-j>", "<C-w>j")
-vim.keymap.set('n', "<C-k>", "<C-w>k")
-
-vim.keymap.set('n', "<C-s>", "<cmd> w <CR>", {desc = "Save file"})
-
-vim.opt.relativenumber = true
-vim.opt.clipboard = "unnamed"
-vim.opt.fillchars = {eob = " "}
