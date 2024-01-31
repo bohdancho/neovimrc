@@ -63,17 +63,17 @@ return {
         },
         "onsails/lspkind.nvim", -- icons
     },
-    opts = function()
+    config = function()
         local cmp = require "cmp"
         vim.api.nvim_set_hl(0, "CmpBorder", { bg = "NONE", fg = "#303340" })
 
-        local c = {}
-        c.snippet = {
+        local config = {}
+        config.snippet = {
             expand = function(args)
                 require("luasnip").lsp_expand(args.body)
             end,
         }
-        c.window = {
+        config.window = {
             completion = cmp.config.window.bordered {
                 border = border "CmpBorder",
                 scrollbar = false,
@@ -82,9 +82,8 @@ return {
                 border = border "CmpBorder",
             },
         }
-        c.confirmation = { completeopt = "menu,menuone,noinsert" }
-        c.formatting = {
-            -- fields = { "kind", "menu", "abbr" },
+        config.completion = { completeopt = "menu,menuone,noinsert" }
+        config.formatting = {
             format = require("lspkind").cmp_format {
                 mode = "symbol", -- show only symbol annotations
                 maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
@@ -92,7 +91,7 @@ return {
                 show_labelDetails = true,
             },
         }
-        c.mapping = {
+        config.mapping = {
             ["<C-Space>"] = cmp.mapping.complete(),
             ["<CR>"] = cmp.mapping.confirm(),
             ["<C-k>"] = cmp.mapping.select_prev_item(),
@@ -100,16 +99,13 @@ return {
             ["<C-u>"] = cmp.mapping.scroll_docs(-4),
             ["<C-d>"] = cmp.mapping.scroll_docs(4),
         }
-        c.sources = {
+        config.sources = {
             { name = "nvim_lsp" },
             { name = "luasnip" },
             { name = "buffer" },
             { name = "nvim_lua" },
             { name = "path" },
         }
-        return c
-    end,
-    config = function(_, opts)
-        require("cmp").setup(opts)
+        cmp.setup(config)
     end,
 }
