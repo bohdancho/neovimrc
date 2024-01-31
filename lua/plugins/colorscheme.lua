@@ -3,8 +3,9 @@ return {
     priority = 1000,
     config = function()
         require("poimandres").setup {}
-    end,
-    init = function()
+        local highlight = require("poimandres.utils").highlight
+        highlight("Identifier", { fg = "#ffffff" })
+
         vim.cmd.colorscheme "poimandres"
     end,
 }
