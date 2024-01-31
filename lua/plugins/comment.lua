@@ -1,7 +1,6 @@
-local idk = 2
 return {
     "numToStr/Comment.nvim",
-    lazy = true,
+    dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
     keys = {
         {
             "<C-_>",
@@ -20,6 +19,8 @@ return {
         },
     },
     config = function()
-        require "Comment"
+        require("Comment").setup {
+            pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+        }
     end,
 }
