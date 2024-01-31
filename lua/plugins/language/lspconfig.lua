@@ -49,7 +49,23 @@ return {
             },
         }
         lspconfig.vtsls.setup { capabilities = capabilities, on_attach = on_attach }
-        lspconfig.emmet_ls.setup { capabilities = capabilities, on_attach = on_attach }
+        lspconfig.emmet_ls.setup {
+            capabilities = capabilities,
+            on_attach = function(client, bufnr)
+                -- expand only on hotkey (excluded from snippets list)
+                vim.keymap.set("i", "<C-e>", function()
+                    client.request("textDocument/completion", vim.lsp.util.make_position_params(), function(_, result)
+                        local textEdit = result[1].textEdit
+                        local snip_string = textEdit.newText
+                        textEdit.newText = ""
+                        vim.lsp.util.apply_text_edits({ textEdit }, bufnr, client.offset_encoding)
+                        require("luasnip").lsp_expand(snip_string)
+                    end, bufnr)
+                end)
+
+                on_attach(client, bufnr)
+            end,
+        }
         lspconfig.tailwindcss.setup {
             capabilities = capabilities,
             on_attach = on_attach,
