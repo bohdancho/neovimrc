@@ -1,7 +1,9 @@
 local M = {}
 
+---@alias ModuleName 'general' | 'lspconfig' | 'gitsigns'
+---@type ModuleName
 local mappings = {}
-mappings.general = {
+mappings["general"] = {
     n = {
         -- moving around panes
         ["<C-h>"] = { "<C-w>h" },
@@ -33,7 +35,7 @@ mappings.general = {
     },
 }
 
-mappings.lspconfig = {
+mappings["lspconfig"] = {
     n = {
         ["gd"] = {
             function()
@@ -93,10 +95,60 @@ mappings.lspconfig = {
     },
 }
 
-M.load = function(sectionName)
+mappings["gitsigns"] = {
+    n = {
+        -- Navigation through hunks
+        ["]c"] = {
+            function()
+                if vim.wo.diff then
+                    return "]c"
+                end
+                vim.schedule(function()
+                    require("gitsigns").next_hunk()
+                end)
+                return "<Ignore>"
+            end,
+            "Jump to next hunk",
+            opts = { expr = true },
+        },
+
+        ["[c"] = {
+            function()
+                if vim.wo.diff then
+                    return "[c"
+                end
+                vim.schedule(function()
+                    require("gitsigns").prev_hunk()
+                end)
+                return "<Ignore>"
+            end,
+            "Jump to prev hunk",
+            opts = { expr = true },
+        },
+
+        -- Actions
+        ["<leader>hr"] = {
+            function()
+                require("gitsigns").reset_hunk()
+            end,
+            "[H]unk [R]eset",
+        },
+
+        ["<leader>hp"] = {
+            function()
+                require("gitsigns").preview_hunk()
+            end,
+            "[H]unk [P]review",
+        },
+    },
+}
+
+---@param sectionName ModuleName
+---@param mapping_opt table | nil
+M.load = function(sectionName, mapping_opt)
     for mode, mode_values in pairs(mappings[sectionName]) do
         for keybind, mapping_info in pairs(mode_values) do
-            local opts = mapping_info.opts or {}
+            local opts = vim.tbl_deep_extend("force", mapping_info.opts or {}, mapping_opt or {})
             opts.desc = mapping_info[2]
 
             vim.keymap.set(mode, keybind, mapping_info[1], opts)
