@@ -1,21 +1,22 @@
 -- https://github.com/NvChad/ui/blob/v2.0/lua/nvchad/renamer.lua
+-- I took it form NvChad (they took it from Reddit) and tweaked it
 
 -- credits to @Malace : https://www.reddit.com/r/neovim/comments/ql4iuj/rename_hover_including_window_title_and/
 -- This is modified version of the above snippet
 
 local M = {}
 local map = vim.keymap.set
+local idk = 2
+idk = 3
 
 M.open = function()
     local currName = vim.fn.expand "<cword>" .. " "
 
     local win = require("plenary.popup").create(currName, {
-        title = "Renamer",
         style = "minimal",
         borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
         relative = "cursor",
-        borderhighlight = "RenamerBorder",
-        titlehighlight = "RenamerTitle",
+        borderhighlight = "CmpBorder",
         focusable = true,
         width = 25,
         height = 1,
@@ -26,10 +27,10 @@ M.open = function()
     vim.cmd "normal A"
     vim.cmd "startinsert"
 
-    map({ "i", "n" }, "<Esc>", "<cmd>q<CR>", { buffer = 0 })
+    map({ "n" }, "<C-c>", "<cmd>q<CR>", { buffer = 0 })
 
     map({ "i", "n" }, "<CR>", function()
-        require("nvchad.renamer").apply(currName, win)
+        M.apply(currName, win)
         vim.cmd.stopinsert()
     end, { buffer = 0 })
 end

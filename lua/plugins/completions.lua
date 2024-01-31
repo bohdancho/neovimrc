@@ -66,46 +66,48 @@ return {
     opts = function()
         local cmp = require "cmp"
         vim.api.nvim_set_hl(0, "CmpBorder", { bg = "NONE", fg = "#303340" })
-        return {
-            snippet = {
-                expand = function(args)
-                    require("luasnip").lsp_expand(args.body)
-                end,
+
+        local c = {}
+        c.snippet = {
+            expand = function(args)
+                require("luasnip").lsp_expand(args.body)
+            end,
+        }
+        c.window = {
+            completion = cmp.config.window.bordered {
+                border = border "CmpBorder",
+                scrollbar = false,
             },
-            window = {
-                completion = cmp.config.window.bordered {
-                    border = border "CmpBorder",
-                    scrollbar = false,
-                },
-                documentation = {
-                    border = border "CmpBorder",
-                },
-            },
-            formatting = {
-                -- fields = { "kind", "menu", "abbr" },
-                format = require("lspkind").cmp_format {
-                    mode = "symbol", -- show only symbol annotations
-                    maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-                    ellipsis_char = "...",
-                    show_labelDetails = true,
-                },
-            },
-            mapping = {
-                ["<C-Space>"] = cmp.mapping.complete(),
-                ["<CR>"] = cmp.mapping.confirm(),
-                ["<C-k>"] = cmp.mapping.select_prev_item(),
-                ["<C-j>"] = cmp.mapping.select_next_item(),
-                ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-                ["<C-d>"] = cmp.mapping.scroll_docs(4),
-            },
-            sources = {
-                { name = "nvim_lsp" },
-                { name = "luasnip" },
-                { name = "buffer" },
-                { name = "nvim_lua" },
-                { name = "path" },
+            documentation = {
+                border = border "CmpBorder",
             },
         }
+        c.confirmation = { completeopt = "menu,menuone,noinsert" }
+        c.formatting = {
+            -- fields = { "kind", "menu", "abbr" },
+            format = require("lspkind").cmp_format {
+                mode = "symbol", -- show only symbol annotations
+                maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+                ellipsis_char = "...",
+                show_labelDetails = true,
+            },
+        }
+        c.mapping = {
+            ["<C-Space>"] = cmp.mapping.complete(),
+            ["<CR>"] = cmp.mapping.confirm(),
+            ["<C-k>"] = cmp.mapping.select_prev_item(),
+            ["<C-j>"] = cmp.mapping.select_next_item(),
+            ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+            ["<C-d>"] = cmp.mapping.scroll_docs(4),
+        }
+        c.sources = {
+            { name = "nvim_lsp" },
+            { name = "luasnip" },
+            { name = "buffer" },
+            { name = "nvim_lua" },
+            { name = "path" },
+        }
+        return c
     end,
     config = function(_, opts)
         require("cmp").setup(opts)
