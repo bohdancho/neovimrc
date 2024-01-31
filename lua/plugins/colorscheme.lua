@@ -4,7 +4,12 @@ return {
     config = function()
         require("poimandres").setup {}
         local highlight = require("poimandres.utils").highlight
-        highlight("Identifier", { fg = "#ffffff" })
+
+        vim.api.nvim_create_autocmd("BufEnter", {
+            callback = function()
+                highlight("Identifier", { fg = "#ffffff" })
+            end,
+        })
 
         vim.cmd.colorscheme "poimandres"
     end,
