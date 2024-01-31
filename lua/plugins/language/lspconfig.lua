@@ -1,5 +1,8 @@
 local capabilities =
     vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), require("cmp_nvim_lsp").default_capabilities())
+local on_attach = function(client, bufnr)
+    require("mappings").load("lspconfig", { buffer = bufnr })
+end
 
 return {
     "neovim/nvim-lspconfig",
@@ -17,14 +20,13 @@ return {
         "yioneko/nvim-vtsls",
     },
     config = function()
-        require("mappings").load "lspconfig"
-
         local lspconfig = require "lspconfig"
         -- set default server config, optional but recommended
         require("lspconfig.configs").vtsls = require("vtsls").lspconfig
 
         lspconfig.lua_ls.setup {
             capabilities = capabilities,
+            on_attach = on_attach,
             settings = {
                 Lua = {
                     diagnostics = {
@@ -42,10 +44,11 @@ return {
                 },
             },
         }
-        lspconfig.vtsls.setup { capabilities = capabilities }
-        lspconfig.emmet_ls.setup { capabilities = capabilities }
+        lspconfig.vtsls.setup { capabilities = capabilities, on_attach = on_attach }
+        lspconfig.emmet_ls.setup { capabilities = capabilities, on_attach = on_attach }
         lspconfig.tailwindcss.setup {
             capabilities = capabilities,
+            on_attach = on_attach,
             settings = {
                 -- add autocomplete in unusual places for classes like cva
                 tailwindCSS = { experimental = { classRegex = { { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" } } } },

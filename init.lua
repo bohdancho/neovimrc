@@ -7,9 +7,12 @@ vim.opt.relativenumber = true
 vim.opt.clipboard = "unnamed"
 vim.opt.undofile = true
 vim.opt.fillchars = { eob = " " }
-vim.opt.formatoptions:remove { "c", "r", "o" }
 vim.opt.splitbelow = true
 vim.g.mapleader = " "
+
+-- disable autocomments on new line
+vim.cmd "autocmd BufEnter * set formatoptions-=cro"
+vim.cmd "autocmd BufEnter * setlocal formatoptions-=cro"
 
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

@@ -65,6 +65,7 @@ return {
     },
     opts = function()
         local cmp = require "cmp"
+        vim.api.nvim_set_hl(0, "CmpBorder", { bg = "NONE", fg = "#303340" })
         return {
             snippet = {
                 expand = function(args)
@@ -74,11 +75,10 @@ return {
             window = {
                 completion = cmp.config.window.bordered {
                     border = border "CmpBorder",
-                    winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
                     scrollbar = false,
                 },
                 documentation = {
-                    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+                    border = border "CmpBorder",
                 },
             },
             formatting = {
