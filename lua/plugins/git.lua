@@ -2,6 +2,24 @@ local mappings = require "mappings"
 
 return {
     {
+        "kdheepak/lazygit.nvim",
+        lazy = true,
+        keys = {
+            { "<leader>gl", "<cmd> LazyGit <CR>", desc = "[G]it [L]azy" },
+        },
+        config = function()
+            require("lazy").setup {
+                {
+                    "kdheepak/lazygit.nvim",
+                    -- optional for floating window border decoration
+                    dependencies = {
+                        "nvim-lua/plenary.nvim",
+                    },
+                },
+            }
+        end,
+    },
+    {
         "lewis6991/gitsigns.nvim",
         ft = { "gitcommit", "diff" },
         event = "VeryLazy",
