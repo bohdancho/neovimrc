@@ -22,6 +22,16 @@ return {
             local telescope = require "telescope"
             telescope.setup {
                 defaults = {
+                    vimgrep_arguments = {
+                        "rg",
+                        "--color=never",
+                        "--no-heading",
+                        "--with-filename",
+                        "--line-number",
+                        "--column",
+                        "--smart-case",
+                        "--fixed-strings", -- raw strings, no regex
+                    },
                     preview = {
                         treesitter = { disable = { "lua" } },
                     },

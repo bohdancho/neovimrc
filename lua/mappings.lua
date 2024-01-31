@@ -60,7 +60,7 @@ mappings["lspconfig"] = {
 
         ["<leader>lr"] = {
             function()
-                require("nvchad.renamer").open()
+                require("plugins.local.renamer").open()
             end,
             "[L]SP [r]ename",
         },

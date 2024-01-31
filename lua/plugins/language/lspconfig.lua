@@ -1,6 +1,9 @@
 local capabilities =
     vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), require("cmp_nvim_lsp").default_capabilities())
 local on_attach = function(client, bufnr)
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+
     require("mappings").load("lspconfig", { buffer = bufnr })
 end
 
@@ -18,6 +21,7 @@ return {
             end,
         },
         "yioneko/nvim-vtsls",
+        "nvim-lua/plenary.nvim", -- used for plugins.local.renamer
     },
     config = function()
         local lspconfig = require "lspconfig"
