@@ -6,8 +6,6 @@
 
 local M = {}
 local map = vim.keymap.set
-local idk = 2
-idk = 3
 
 M.open = function()
     local currName = vim.fn.expand "<cword>" .. " "
@@ -24,10 +22,10 @@ M.open = function()
         col = "cursor-1",
     })
 
-    vim.cmd "normal A"
-    vim.cmd "startinsert"
+    vim.cmd "normal E"
 
     map({ "n" }, "<C-c>", "<cmd>q<CR>", { buffer = 0 })
+    map({ "n" }, "q", "<cmd>q<CR>", { buffer = 0 })
 
     map({ "i", "n" }, "<CR>", function()
         M.apply(currName, win)
