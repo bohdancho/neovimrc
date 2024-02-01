@@ -1,5 +1,9 @@
 return {
     "nvim-tree/nvim-tree.lua",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    keys = {
+        { "<C-n>", "<cmd> NvimTreeToggle <CR>", desc = "Toggle nvimtree" },
+    },
     lazy = true,
     opts = {
         update_focused_file = {
@@ -26,35 +30,40 @@ return {
                 },
 
                 glyphs = {
-                    default = "󰈚",
+                    default = "",
                     symlink = "",
                     folder = {
-                        default = "",
-                        empty = "",
-                        empty_open = "",
-                        open = "",
-                        symlink = "",
-                        symlink_open = "",
                         arrow_open = "",
                         arrow_closed = "",
+                        default = "",
+                        open = "",
+                        symlink = "",
+                        symlink_open = "",
                     },
                     git = {
-                        unstaged = "✗",
-                        staged = "✓",
-                        unmerged = "",
+                        unstaged = "",
+                        staged = "S",
+                        unmerged = "",
                         renamed = "➜",
-                        untracked = "★",
+                        untracked = "U",
                         deleted = "",
                         ignored = "◌",
                     },
                 },
             },
         },
+        diagnostics = {
+            enable = true,
+            show_on_dirs = true,
+            icons = {
+                hint = "",
+                info = "",
+                warning = "",
+                error = "",
+            },
+        },
     },
     config = function(_, opts)
         require("nvim-tree").setup(opts)
     end,
-    keys = {
-        { "<C-n>", "<cmd> NvimTreeToggle <CR>", desc = "Toggle nvimtree" },
-    },
 }
