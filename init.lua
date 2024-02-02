@@ -1,6 +1,6 @@
 vim.opt.expandtab = true
 vim.opt.relativenumber = true
-vim.opt.clipboard = "unnamed"
+vim.opt.clipboard = "unnamed,unnamedplus"
 vim.opt.undofile = true
 vim.opt.fillchars = { eob = " " }
 vim.opt.splitbelow = true

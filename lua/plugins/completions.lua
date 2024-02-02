@@ -14,7 +14,7 @@ end
 return {
     "hrsh7th/nvim-cmp",
     lazy = true,
-    event = "InsertEnter",
+    event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
         {
             -- snippet plugin
@@ -95,8 +95,8 @@ return {
         config.mapping = {
             ["<C-Space>"] = cmp.mapping.complete(),
             ["<CR>"] = cmp.mapping.confirm(),
-            ["<C-k>"] = cmp.mapping.select_prev_item(),
-            ["<C-j>"] = cmp.mapping.select_next_item(),
+            ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
+            ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
             ["<C-u>"] = cmp.mapping.scroll_docs(-4),
             ["<C-d>"] = cmp.mapping.scroll_docs(4),
         }

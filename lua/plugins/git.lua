@@ -23,7 +23,7 @@ return {
     {
         "lewis6991/gitsigns.nvim",
         ft = { "gitcommit", "diff" },
-        event = "VeryLazy",
+        event = { "BufReadPre", "BufNewFile" },
         opts = {
             signs = {
                 add = { text = "│" },

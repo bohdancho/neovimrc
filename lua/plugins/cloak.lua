@@ -1,5 +1,6 @@
 return {
     "laytan/cloak.nvim",
+    priority = 1000,
     config = function()
         require("cloak").setup {
             enabled = true,

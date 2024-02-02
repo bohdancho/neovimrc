@@ -1,8 +1,10 @@
 return {
     "numToStr/Comment.nvim",
     dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
-    lazy = false,
+    lazy = true,
     keys = {
+        { "gc", mode = { "n", "v" } },
+        { "gb", mode = { "n", "v" } },
         {
             "<C-_>",
             function()
@@ -11,7 +13,6 @@ return {
             mode = "n",
             desc = "Toggle comment",
         },
-
         {
             "<C-_>",
             "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",

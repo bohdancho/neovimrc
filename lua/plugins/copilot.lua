@@ -1,18 +1,12 @@
 return {
     "zbirenbaum/copilot.lua",
     lazy = true,
+    event = "InsertEnter",
     build = ":Copilot auth",
-    keys = {
-        {
-            "<M-Bslash>",
-            nil,
-            mode = "i",
-        },
-    },
     opts = {
         suggestion = {
+            auto_trigger = true,
             keymap = {
-                next = "<M-Bslash>",
                 accept = "<Tab>",
             },
         },
