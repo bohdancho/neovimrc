@@ -1,5 +1,5 @@
 -- https://github.com/NvChad/ui/blob/v2.0/lua/nvchad/renamer.lua
--- I took it form NvChad (they took it from Reddit) and tweaked it
+-- I took it from NvChad (they took it from Reddit) and tweaked it
 
 -- credits to @Malace : https://www.reddit.com/r/neovim/comments/ql4iuj/rename_hover_including_window_title_and/
 -- This is modified version of the above snippet
@@ -27,6 +27,10 @@ M.open = function()
     map({ "n" }, "<C-c>", "<cmd>q<CR>", { buffer = 0 })
     map({ "n" }, "q", "<cmd>q<CR>", { buffer = 0 })
 
+    map({ "n" }, "<C-s>", function()
+        M.apply(currName, win)
+        vim.cmd.stopinsert()
+    end, { buffer = 0 })
     map({ "i", "n" }, "<CR>", function()
         M.apply(currName, win)
         vim.cmd.stopinsert()
