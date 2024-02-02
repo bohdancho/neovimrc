@@ -4,6 +4,7 @@ vim.opt.clipboard = "unnamed"
 vim.opt.undofile = true
 vim.opt.fillchars = { eob = " " }
 vim.opt.splitbelow = true
+vim.opt.swapfile = false
 vim.g.mapleader = " "
 
 -- disable autocomments on new line
