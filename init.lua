@@ -1,7 +1,7 @@
 vim.opt.expandtab = true
 vim.opt.relativenumber = true
 vim.opt.number = true
-vim.opt.clipboard = "unnamed,unnamedplus"
+vim.opt.clipboard = "unnamed,unnamedplus" -- significantly slows down startup
 vim.opt.undofile = true
 vim.opt.fillchars = { eob = " " }
 vim.opt.splitbelow = true
