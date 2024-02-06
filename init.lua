@@ -1,11 +1,19 @@
-vim.opt.expandtab = true
 vim.opt.relativenumber = true
 vim.opt.number = true
+vim.opt.fillchars = { eob = " " }
+vim.opt.hlsearch = false
+
 vim.opt.clipboard = "unnamed,unnamedplus" -- significantly slows down startup
 vim.opt.undofile = true
-vim.opt.fillchars = { eob = " " }
-vim.opt.splitbelow = true
 vim.opt.swapfile = false
+vim.opt.splitbelow = true
+
+vim.opt.expandtab = true
+
+-- ignore case unless there is a capital letter
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
 vim.g.mapleader = " "
 
 -- disable autocomments on new line
