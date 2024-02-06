@@ -1,0 +1,3 @@
+- [ ] move to bohdancho dir in lua/
+- [ ] get rid of mappings configuration types inconsystency (mappings.lua or keys in lazy configs)
+- [ ] should I ditch null_ls (aka none_ls)?
