@@ -1,6 +1,7 @@
 ```
 - [x] move to bohdancho dir in lua/
 - [x] get rid of mappings configuration types inconsystency (mappings.lua or keys in lazy configs)
+- [ ] lazy load todo-comments and add keymaps
 - [ ] remove clipboard=unnamed,unnamedplus and add a leaderP/Y mapping for system clipboard
 - [ ] should I ditch null_ls (aka none_ls)?
 - [ ] telescope open most recent
