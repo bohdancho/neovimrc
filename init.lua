@@ -42,4 +42,4 @@ require("lazy").setup({
     },
 })
 
-require("bohdancho.mappings").load "general"
+require("bohdancho.mappings").load_module "general"

@@ -1,9 +1,9 @@
 local M = {}
 
----@alias ModuleName 'general' | 'lspconfig' | 'gitsigns'
+---@alias ModuleName 'general'
 ---@type ModuleName
-local mappings = {}
-mappings["general"] = {
+local modules = {}
+modules["general"] = {
     n = {
         -- moving around panes
         ["<C-h>"] = { "<C-w>h" },
@@ -40,118 +40,14 @@ mappings["general"] = {
     },
 }
 
-mappings["lspconfig"] = {
-    n = {
-        ["gd"] = {
-            function()
-                vim.lsp.buf.definition()
-            end,
-            "LSP definition",
-        },
-
-        ["gr"] = {
-            function()
-                require("telescope.builtin").lsp_references()
-            end,
-            "lsp references",
-        },
-
-        ["K"] = {
-            function()
-                vim.lsp.buf.hover()
-            end,
-            "LSP hover",
-        },
-
-        ["<leader>lr"] = {
-            function()
-                require("bohdancho.renamer").open()
-            end,
-            "[L]SP [r]ename",
-        },
-
-        ["<leader>la"] = {
-            function()
-                vim.lsp.buf.code_action()
-            end,
-            "[L]SP code [a]ction",
-        },
-
-        ["<leader>d"] = {
-            function()
-                vim.diagnostic.open_float { border = "rounded" }
-            end,
-            "Floating [d]iagnostic",
-        },
-
-        ["[d"] = {
-            function()
-                vim.diagnostic.goto_prev { float = { border = "rounded" } }
-            end,
-            "Goto prev",
-        },
-
-        ["]d"] = {
-            function()
-                vim.diagnostic.goto_next { float = { border = "rounded" } }
-            end,
-            "Goto next",
-        },
-    },
-}
-
-mappings["gitsigns"] = {
-    n = {
-        -- Navigation through hunks
-        ["]c"] = {
-            function()
-                if vim.wo.diff then
-                    return "]c"
-                end
-                vim.schedule(function()
-                    require("gitsigns").next_hunk()
-                end)
-                return "<Ignore>"
-            end,
-            "Jump to next hunk",
-            opts = { expr = true },
-        },
-
-        ["[c"] = {
-            function()
-                if vim.wo.diff then
-                    return "[c"
-                end
-                vim.schedule(function()
-                    require("gitsigns").prev_hunk()
-                end)
-                return "<Ignore>"
-            end,
-            "Jump to prev hunk",
-            opts = { expr = true },
-        },
-
-        -- Actions
-        ["<leader>hr"] = {
-            function()
-                require("gitsigns").reset_hunk()
-            end,
-            "[H]unk [R]eset",
-        },
-
-        ["<leader>hp"] = {
-            function()
-                require("gitsigns").preview_hunk()
-            end,
-            "[H]unk [P]review",
-        },
-    },
-}
-
----@param sectionName ModuleName
+---@param module_name ModuleName
 ---@param mapping_opt table | nil
-M.load = function(sectionName, mapping_opt)
-    for mode, mode_values in pairs(mappings[sectionName]) do
+M.load_module = function(module_name, mapping_opt)
+    M.load_table(modules[module_name], mapping_opt)
+end
+
+M.load_table = function(table, mapping_opt)
+    for mode, mode_values in pairs(table) do
         for keybind, mapping_info in pairs(mode_values) do
             local opts = vim.tbl_deep_extend("force", mapping_info.opts or {}, mapping_opt or {})
             opts.desc = mapping_info[2]

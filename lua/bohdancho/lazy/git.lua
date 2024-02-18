@@ -1,6 +1,9 @@
-local mappings = require "bohdancho.mappings"
+local M
 
-return {
+local mappings = require "bohdancho.mappings"
+local mappings_gitsigns
+
+M = {
     {
         "kdheepak/lazygit.nvim",
         lazy = true,
@@ -34,7 +37,7 @@ return {
                 untracked = { text = "│" },
             },
             on_attach = function(bufnr)
-                mappings.load("gitsigns", { buffer = bufnr })
+                mappings.load_table(mappings_gitsigns, { buffer = bufnr })
             end,
         },
         config = function(_, opts)
@@ -52,3 +55,53 @@ return {
         },
     },
 }
+
+mappings_gitsigns = {
+    n = {
+        -- Navigation through hunks
+        ["]c"] = {
+            function()
+                if vim.wo.diff then
+                    return "]c"
+                end
+                vim.schedule(function()
+                    require("gitsigns").next_hunk()
+                end)
+                return "<Ignore>"
+            end,
+            "Jump to next hunk",
+            opts = { expr = true },
+        },
+
+        ["[c"] = {
+            function()
+                if vim.wo.diff then
+                    return "[c"
+                end
+                vim.schedule(function()
+                    require("gitsigns").prev_hunk()
+                end)
+                return "<Ignore>"
+            end,
+            "Jump to prev hunk",
+            opts = { expr = true },
+        },
+
+        -- Actions
+        ["<leader>hr"] = {
+            function()
+                require("gitsigns").reset_hunk()
+            end,
+            "[H]unk [R]eset",
+        },
+
+        ["<leader>hp"] = {
+            function()
+                require("gitsigns").preview_hunk()
+            end,
+            "[H]unk [P]review",
+        },
+    },
+}
+
+return M

@@ -1,14 +1,18 @@
+local M
+
+local mappings
 local capabilities =
     vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), require("cmp_nvim_lsp").default_capabilities())
+
 local on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
 
     require("lsp_signature").on_attach({}, bufnr)
-    require("bohdancho.mappings").load("lspconfig", { buffer = bufnr })
+    require("bohdancho.mappings").load_table(mappings, { buffer = bufnr })
 end
 
-return {
+M = {
     "neovim/nvim-lspconfig",
     dependencies = {
         "williamboman/mason.nvim",
@@ -79,3 +83,65 @@ return {
         }
     end,
 }
+
+mappings = {
+    n = {
+        ["gd"] = {
+            function()
+                vim.lsp.buf.definition()
+            end,
+            "LSP definition",
+        },
+
+        ["gr"] = {
+            function()
+                require("telescope.builtin").lsp_references()
+            end,
+            "lsp references",
+        },
+
+        ["K"] = {
+            function()
+                vim.lsp.buf.hover()
+            end,
+            "LSP hover",
+        },
+
+        ["<leader>lr"] = {
+            function()
+                require("bohdancho.renamer").open()
+            end,
+            "[L]SP [r]ename",
+        },
+
+        ["<leader>la"] = {
+            function()
+                vim.lsp.buf.code_action()
+            end,
+            "[L]SP code [a]ction",
+        },
+
+        ["<leader>d"] = {
+            function()
+                vim.diagnostic.open_float { border = "rounded" }
+            end,
+            "Floating [d]iagnostic",
+        },
+
+        ["[d"] = {
+            function()
+                vim.diagnostic.goto_prev { float = { border = "rounded" } }
+            end,
+            "Goto prev",
+        },
+
+        ["]d"] = {
+            function()
+                vim.diagnostic.goto_next { float = { border = "rounded" } }
+            end,
+            "Goto next",
+        },
+    },
+}
+
+return M
