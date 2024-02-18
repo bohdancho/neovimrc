@@ -5,7 +5,7 @@ local on_attach = function(client, bufnr)
     client.server_capabilities.documentRangeFormattingProvider = false
 
     require("lsp_signature").on_attach({}, bufnr)
-    require("mappings").load("lspconfig", { buffer = bufnr })
+    require("bohdancho.mappings").load("lspconfig", { buffer = bufnr })
 end
 
 return {
@@ -21,7 +21,7 @@ return {
             end,
         },
         "yioneko/nvim-vtsls",
-        "nvim-lua/plenary.nvim", -- used for plugins.local.renamer
+        "nvim-lua/plenary.nvim", -- used for bohdancho.renamer
         {
             "ray-x/lsp_signature.nvim",
         },

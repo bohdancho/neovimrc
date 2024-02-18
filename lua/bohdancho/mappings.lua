@@ -65,7 +65,7 @@ mappings["lspconfig"] = {
 
         ["<leader>lr"] = {
             function()
-                require("plugins.local.renamer").open()
+                require("bohdancho.renamer").open()
             end,
             "[L]SP [r]ename",
         },

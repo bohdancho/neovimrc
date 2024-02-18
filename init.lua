@@ -34,12 +34,12 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    { import = "plugins" },
-    { import = "plugins.language" },
+    { import = "bohdancho.plugins" },
+    { import = "bohdancho.plugins.language" },
 }, {
     change_detection = {
         notify = false,
     },
 })
 
-require("mappings").load "general"
+require("bohdancho.mappings").load "general"
