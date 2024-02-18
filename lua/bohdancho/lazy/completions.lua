@@ -66,7 +66,6 @@ return {
     },
     config = function()
         local cmp = require "cmp"
-        vim.api.nvim_set_hl(0, "CmpBorder", { bg = "NONE", fg = "#303340" })
 
         local config = {}
         config.snippet = {
@@ -76,11 +75,11 @@ return {
         }
         config.window = {
             completion = cmp.config.window.bordered {
-                border = border "CmpBorder",
+                border = border "BohdanchoBorder",
                 scrollbar = false,
             },
             documentation = {
-                border = border "CmpBorder",
+                border = border "BohdanchoBorder",
             },
         }
         config.completion = { completeopt = "menu,menuone,noinsert" }

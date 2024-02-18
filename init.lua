@@ -34,8 +34,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    { import = "bohdancho.plugins" },
-    { import = "bohdancho.plugins.language" },
+    { import = "bohdancho.lazy" },
+    { import = "bohdancho.lazy.language" },
 }, {
     change_detection = {
         notify = false,
