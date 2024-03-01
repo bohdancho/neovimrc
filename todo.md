@@ -1,8 +1,9 @@
 ```
-- [x] move to bohdancho dir in lua/
-- [x] get rid of mappings configuration types inconsystency (mappings.lua or keys in lazy configs)
+- [ ] telescope windowed view (like fix-list)
+- [ ] fix emmet
 - [ ] lazy load todo-comments and add keymaps
 - [ ] remove clipboard=unnamed,unnamedplus and add a leaderP/Y mapping for system clipboard
+- [ ] why do I need to do :e all the time in TS
 - [ ] should I ditch null_ls (aka none_ls)?
 - [ ] telescope open most recent
 - [ ] [LazyGit usage; Project-wide Find & Replace](https://www.reddit.com/r/neovim/comments/1aox1us/comment/kq2f6t8/?utm_source=share&utm_medium=web2x&context=3)
