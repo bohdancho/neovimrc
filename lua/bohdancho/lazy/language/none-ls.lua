@@ -1,5 +1,6 @@
 return {
     "nvimtools/none-ls.nvim",
+    commit = "1dad329b3899413e7e8e03412b2489dbcda5f7e4",
     dependencies = {
         "williamboman/mason.nvim",
         {
