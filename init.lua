@@ -1,8 +1,11 @@
 vim.opt.relativenumber = true
 vim.opt.number = true
 vim.opt.fillchars = { eob = " " }
-vim.opt.hlsearch = false
 
+vim.opt.hlsearch = true
+vim.keymap.set('n', '<C-c>', '<cmd>nohlsearch<CR>')
+
+vim.opt.cursorline = true
 vim.opt.clipboard = "unnamed,unnamedplus" -- significantly slows down startup
 vim.opt.undofile = true
 vim.opt.swapfile = false
@@ -19,6 +22,15 @@ vim.g.mapleader = " "
 -- disable autocomments on new line
 vim.cmd "autocmd BufEnter * set formatoptions-=cro"
 vim.cmd "autocmd BufEnter * setlocal formatoptions-=cro"
+
+-- Highlight when yanking (copying) text
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
 
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
