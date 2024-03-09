@@ -1,9 +1,8 @@
-```
 - [ ] migrate from deprecated eslint_d
 - [ ] adopt smth from kickstart
-    - [ ] C+y to accept completion
-    - [ ] should I ditch null_ls (aka none_ls)?
-    - [ ] telescope open most recent
+  - [ ] C+y to accept completion
+  - [ ] should I ditch null_ls (aka none_ls)?
+  - [ ] telescope open most recent
 - [ ] wrap with cn
 - [ ] fix emmet
 - [ ] lazy load todo-comments and add keymaps
@@ -13,4 +12,3 @@
 - [ ] LazyGit open file in vim
 - [ ] cmp popup and copilot suggestions linger after InsertLeave
 - [ ] [global-note](https://www.reddit.com/r/neovim/s/Yr56hmcdrp)
-```

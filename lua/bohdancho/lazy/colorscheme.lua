@@ -1,21 +1,11 @@
 return {
-    "olivercederborg/poimandres.nvim",
+    "folke/tokyonight.nvim",
+    lazy = false,
     priority = 1000,
     config = function()
-        local poimandres = require "poimandres"
-        local highlight = require("poimandres.utils").highlight
-        local palette = require "poimandres.palette"
+        vim.cmd.colorscheme "tokyonight-night"
 
-        poimandres.setup {}
-
-        vim.api.nvim_set_hl(0, "BohdanchoBorder", { bg = "NONE", fg = palette.background1 })
-
-        vim.api.nvim_create_autocmd("BufEnter", {
-            callback = function()
-                highlight("Identifier", { fg = "#ffffff" })
-            end,
-        })
-
-        vim.cmd.colorscheme "poimandres"
+        -- TODO: do i need this?
+        -- vim.cmd.hi "Comment gui=none"
     end,
 }
