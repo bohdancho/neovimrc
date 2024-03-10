@@ -13,4 +13,5 @@
 - [ ] LazyGit open file in vim
 - [ ] cmp popup and copilot suggestions linger after InsertLeave
 - [ ] undo tree
+- [ ] vim-visual-multi
 - [ ] pin versions
