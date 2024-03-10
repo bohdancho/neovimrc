@@ -78,6 +78,17 @@ return {
                         client.request("textDocument/completion", vim.lsp.util.make_position_params(), function(_, result)
                             local textEdit = result[1].textEdit
                             local snip_string = textEdit.newText
+
+                            -- remove the inserted text
+                            local start_col = textEdit.range.start.character + 1
+                            vim.fn.cursor(vim.fn.line ".", start_col)
+                            local old_text = result[1].label
+                            vim.cmd.normal { args = { "d" .. #old_text .. "l" } }
+
+                            -- if the inserted text was the last text on the line, the deletion command will leave the cursor 1 column left
+                            -- of where we need to insert the snippet (because insert mode can put the cursor 1 position ahead of the last column)
+                            -- move the cursor back over 1
+                            vim.fn.cursor(vim.fn.line ".", start_col)
                             textEdit.newText = ""
                             vim.lsp.util.apply_text_edits({ textEdit }, bufnr, client.offset_encoding)
                             require("luasnip").lsp_expand(snip_string)
