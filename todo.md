@@ -1,6 +1,6 @@
 - [x] border tokyo
 - [ ] adopt smth from kickstart
-  - [ ] C+y to accept completion
+  - [x] C+y to accept completion
   - [ ] should I ditch null_ls (aka none_ls)?
   - [x] telescope open most recent
 - [ ] migrate from deprecated eslint_d
