@@ -1,9 +1,8 @@
 return {
     "folke/trouble.nvim",
     keys = {
-        { "<leader>tl", "<cmd>TroubleToggle<cr>" },
+        { "<leader>tr", "<cmd>TroubleToggle<cr>", desc = "[T][r]ouble toggle" },
     },
-    lazy = true,
     config = function()
         require("trouble").setup {}
     end,
