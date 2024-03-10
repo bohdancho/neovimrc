@@ -1,9 +1,4 @@
-local M
-
-local mappings = require "bohdancho.mappings"
-local mappings_gitsigns
-
-M = {
+return {
     {
         "kdheepak/lazygit.nvim",
         lazy = true,
@@ -37,7 +32,44 @@ M = {
                 untracked = { text = "│" },
             },
             on_attach = function(bufnr)
-                mappings.load_table(mappings_gitsigns, { buffer = bufnr })
+                local gs = require "gitsigns"
+
+                local function map(mode, l, r, opts)
+                    opts = opts or {}
+                    opts.buffer = bufnr
+                    vim.keymap.set(mode, l, r, opts)
+                end
+
+                -- Navigation through hunks
+                map("n", "]c", function()
+                    if vim.wo.diff then
+                        return "]c"
+                    end
+                    vim.schedule(gs.next_hunk)
+                    return "<Ignore>"
+                end, { desc = "Jump to next hunk", expr = true })
+
+                map("n", "[c", function()
+                    if vim.wo.diff then
+                        return "[c"
+                    end
+                    vim.schedule(gs.prev_hunk)
+                    return "<Ignore>"
+                end, { desc = "Jump to prev hunk", expr = true })
+
+                map("n", "<leader>hr", gs.reset_hunk, { desc = "[H]unk [R]eset" })
+                map("n", "<leader>hp", gs.preview_hunk, { desc = "[H]unk [P]review" })
+                map("n", "<leader>hs", gs.stage_hunk)
+                map("n", "<leader>hu", gs.undo_stage_hunk)
+
+                map("v", "<leader>hs", function()
+                    gs.stage_hunk { vim.fn.line ".", vim.fn.line "v" }
+                end)
+                map("v", "<leader>hr", function()
+                    gs.reset_hunk { vim.fn.line ".", vim.fn.line "v" }
+                end)
+                map("n", "<leader>hS", gs.stage_buffer)
+                map("n", "<leader>hR", gs.reset_buffer)
             end,
         },
         config = function(_, opts)
@@ -56,53 +88,3 @@ M = {
         },
     },
 }
-
-mappings_gitsigns = {
-    n = {
-        -- Navigation through hunks
-        ["]c"] = {
-            function()
-                if vim.wo.diff then
-                    return "]c"
-                end
-                vim.schedule(function()
-                    require("gitsigns").next_hunk()
-                end)
-                return "<Ignore>"
-            end,
-            "Jump to next hunk",
-            opts = { expr = true },
-        },
-
-        ["[c"] = {
-            function()
-                if vim.wo.diff then
-                    return "[c"
-                end
-                vim.schedule(function()
-                    require("gitsigns").prev_hunk()
-                end)
-                return "<Ignore>"
-            end,
-            "Jump to prev hunk",
-            opts = { expr = true },
-        },
-
-        -- Actions
-        ["<leader>hr"] = {
-            function()
-                require("gitsigns").reset_hunk()
-            end,
-            "[H]unk [R]eset",
-        },
-
-        ["<leader>hp"] = {
-            function()
-                require("gitsigns").preview_hunk()
-            end,
-            "[H]unk [P]review",
-        },
-    },
-}
-
-return M

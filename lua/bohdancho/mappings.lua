@@ -1,61 +1,25 @@
-local M = {}
+vim.keymap.set("n", "<C-h>", "<C-w>h")
+vim.keymap.set("n", "<C-l>", "<C-w>l")
+vim.keymap.set("n", "<C-j>", "<C-w>j")
+vim.keymap.set("n", "<C-k>", "<C-w>k")
 
----@diagnostic disable-next-line: duplicate-doc-alias
----@alias ModuleName 'general'
----@type ModuleName
-local modules = {}
-modules["general"] = {
-    n = {
-        -- moving around panes
-        ["<C-h>"] = { "<C-w>h" },
-        ["<C-l>"] = { "<C-w>l" },
-        ["<C-j>"] = { "<C-w>j" },
-        ["<C-k>"] = { "<C-w>k" },
+vim.keymap.set("n", "<C-s>", "<cmd> w <CR>", { desc = "Save file" })
 
-        ["<C-s>"] = { "<cmd> w <CR>", "Save file" },
+-- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
+-- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
+-- empty mode is same as using <cmd> :map
+-- also don't use g[j|k] when in operator pending mode, so it doesn't alter d, y or c behaviour
+vim.keymap.set("n", "j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { desc = "Move down", expr = true })
+vim.keymap.set("n", "k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc = "Move up", expr = true })
 
-        -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
-        -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
-        -- empty mode is same as using <cmd> :map
-        -- also don't use g[j|k] when in operator pending mode, so it doesn't alter d, y or c behaviour
-        ["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", opts = { expr = true } },
-        ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", opts = { expr = true } },
-    },
+-- Don't copy the replaced text after pasting in visual mode
+-- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
+vim.keymap.set("v", "p", 'p:let @+=@0<CR>:let @"=@0<CR>', { desc = "Dont copy replaced text", silent = true })
 
-    v = {
-        -- Don't copy the replaced text after pasting in visual mode
-        -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
-        ["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', "Dont copy replaced text", opts = { silent = true } },
-    },
+-- navigate within insert mode
+vim.keymap.set("i", "<C-h>", "<Left>", { desc = "Move left" })
+vim.keymap.set("i", "<C-l>", "<Right>", { desc = "Move right" })
+vim.keymap.set("i", "<C-j>", "<Down>", { desc = "Move down" })
+vim.keymap.set("i", "<C-k>", "<Up>", { desc = "Move up" })
 
-    i = {
-        -- navigate within insert mode
-        ["<C-h>"] = { "<Left>", "Move left" },
-        ["<C-l>"] = { "<Right>", "Move right" },
-        ["<C-j>"] = { "<Down>", "Move down" },
-        ["<C-k>"] = { "<Up>", "Move up" },
-    },
-
-    t = {
-        ["<C-x>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>", true, true, true), "Escape terminal mode" },
-    },
-}
-
----@param module_name ModuleName
----@param mapping_opt table | nil
-M.load_module = function(module_name, mapping_opt)
-    M.load_table(modules[module_name], mapping_opt)
-end
-
-M.load_table = function(table, mapping_opt)
-    for mode, mode_values in pairs(table) do
-        for keybind, mapping_info in pairs(mode_values) do
-            local opts = vim.tbl_deep_extend("force", mapping_info.opts or {}, mapping_opt or {})
-            opts.desc = mapping_info[2]
-
-            vim.keymap.set(mode, keybind, mapping_info[1], opts)
-        end
-    end
-end
-
-return M
+vim.keymap.set("t", "<C-x>", vim.api.nvim_replace_termcodes("<C-\\><C-N>", true, true, true), { desc = "Escape terminal mode" })

@@ -73,7 +73,6 @@ return {
             vtsls = {},
             emmet_ls = {
                 on_attach = function(client, bufnr)
-                    -- expand only on hotkey (excluded from snippets list)
                     vim.keymap.set("i", "<C-e>", function()
                         client.request("textDocument/completion", vim.lsp.util.make_position_params(), function(_, result)
                             local textEdit = result[1].textEdit
