@@ -9,6 +9,10 @@ return {
     config = function()
         local configs = require "nvim-treesitter.configs"
 
+        require("treesitter-context").setup {
+            multiline_threshold = 1, -- Maximum number of lines to show for a single context
+        }
+
         configs.setup {
             auto_install = true,
             highlight = {

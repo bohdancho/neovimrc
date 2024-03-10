@@ -1,5 +1,3 @@
-local M
-
 local capabilities =
     vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), require("cmp_nvim_lsp").default_capabilities())
 
@@ -33,7 +31,7 @@ local on_attach = function(client, bufnr)
     end, "Goto next")
 end
 
-M = {
+return {
     "neovim/nvim-lspconfig",
     dependencies = {
         "williamboman/mason.nvim",
@@ -104,5 +102,3 @@ M = {
         }
     end,
 }
-
-return M
