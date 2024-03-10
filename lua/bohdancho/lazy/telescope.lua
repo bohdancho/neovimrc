@@ -5,7 +5,6 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
-        event = "VeryLazy",
         keys = {
             { "<leader>ff", "<cmd> Telescope find_files <CR>", desc = "Find files" },
             { "<leader>fa", "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", desc = "Find all" },

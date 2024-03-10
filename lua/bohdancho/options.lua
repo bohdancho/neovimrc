@@ -21,5 +21,3 @@ vim.opt.inccommand = "split"
 -- ignore case unless there is a capital letter
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-
-vim.g.mapleader = " "

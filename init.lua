@@ -1,3 +1,4 @@
+vim.g.mapleader = " "
 require "bohdancho.mappings"
 require "bohdancho.options"
 require "bohdancho.autocmds"
