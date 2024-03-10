@@ -13,6 +13,7 @@ return {
             { "<leader>fb", "<cmd> Telescope buffers <CR>", desc = "Find buffers" },
             { "<leader>fh", "<cmd> Telescope help_tags <CR>", desc = "Help page" },
             { "<leader>fz", "<cmd> Telescope current_buffer_fuzzy_find <CR>", desc = "Find in current buffer" },
+            { "<leader>fs", "<cmd> Telescope lsp_workspace_symbols <CR>", desc = "Find workspace symbols" },
             { "<leader>fb", "<cmd> Telescope builtin <CR>", desc = "Find builtin" },
             { "<leader>fr", "<cmd> Telescope resume <CR>", desc = "Find resume" },
 

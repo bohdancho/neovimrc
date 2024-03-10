@@ -1,10 +1,15 @@
 return {
     {
         "lukas-reineke/indent-blankline.nvim",
-        version = "v2.20.8",
+        main = "ibl",
         opts = {
-            show_trailing_blankline_indent = true,
-            show_first_indent_level = true,
+            indent = {
+                char = "▏", -- This is a slightly thinner char than the default one, check :help ibl.config.indent.char
+            },
+            scope = {
+                show_start = false,
+                show_end = false,
+            },
         },
     },
     {

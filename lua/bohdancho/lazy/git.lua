@@ -49,6 +49,7 @@ M = {
         lazy = true,
         keys = {
             { "<leader>gd", "<cmd> Gvdiff <CR>", desc = "[G]it [D]iff" },
+            { "<leader>gh", "<cmd> 0GcLog <CR>", desc = "[G]it file [H]istory" },
         },
         cmd = {
             "G",
