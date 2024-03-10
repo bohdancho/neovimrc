@@ -1,8 +1,9 @@
-- [ ] migrate from deprecated eslint_d
+- [x] border tokyo
 - [ ] adopt smth from kickstart
   - [ ] C+y to accept completion
   - [ ] should I ditch null_ls (aka none_ls)?
-  - [ ] telescope open most recent
+  - [x] telescope open most recent
+- [ ] migrate from deprecated eslint_d
 - [ ] wrap with cn
 - [ ] fix emmet
 - [ ] lazy load todo-comments and add keymaps
@@ -11,4 +12,5 @@
 - [ ] [LazyGit usage; Project-wide Find & Replace](https://www.reddit.com/r/neovim/comments/1aox1us/comment/kq2f6t8/?utm_source=share&utm_medium=web2x&context=3)
 - [ ] LazyGit open file in vim
 - [ ] cmp popup and copilot suggestions linger after InsertLeave
-- [ ] [global-note](https://www.reddit.com/r/neovim/s/Yr56hmcdrp)
+- [ ] undo tree
+- [ ] pin versions

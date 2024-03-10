@@ -1,6 +1,5 @@
 local M
 
-local mappings
 local capabilities =
     vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), require("cmp_nvim_lsp").default_capabilities())
 
@@ -9,7 +8,29 @@ local on_attach = function(client, bufnr)
     client.server_capabilities.documentRangeFormattingProvider = false
 
     require("lsp_signature").on_attach({}, bufnr)
-    require("bohdancho.mappings").load_table(mappings, { buffer = bufnr })
+
+    local map = function(keys, func, desc)
+        vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
+    end
+
+    -- Jump to the definition of the word under your cursor.
+    --  This is where a variable was first declared, or where a function is defined, etc.
+    --  To jump back, press <C-T>.
+
+    map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+    map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+    map("K", vim.lsp.buf.hover, "Hover")
+    map("<leader>lr", require("bohdancho.renamer").open, "Rename")
+    map("<leader>la", vim.lsp.buf.code_action, "Code Action")
+    map("<leader>d", function()
+        vim.diagnostic.open_float { border = "rounded" }
+    end, "Floating [d]iagnostic")
+    map("[d", function()
+        vim.diagnostic.goto_prev { float = { border = "rounded" } }
+    end, "Goto prev")
+    map("]d", function()
+        vim.diagnostic.goto_next { float = { border = "rounded" } }
+    end, "Goto next")
 end
 
 M = {
@@ -82,66 +103,6 @@ M = {
             },
         }
     end,
-}
-
-mappings = {
-    n = {
-        ["gd"] = {
-            function()
-                vim.lsp.buf.definition()
-            end,
-            "LSP definition",
-        },
-
-        ["gr"] = {
-            function()
-                require("telescope.builtin").lsp_references()
-            end,
-            "lsp references",
-        },
-
-        ["K"] = {
-            function()
-                vim.lsp.buf.hover()
-            end,
-            "LSP hover",
-        },
-
-        ["<leader>lr"] = {
-            function()
-                require("bohdancho.renamer").open()
-            end,
-            "[L]SP [r]ename",
-        },
-
-        ["<leader>la"] = {
-            function()
-                vim.lsp.buf.code_action()
-            end,
-            "[L]SP code [a]ction",
-        },
-
-        ["<leader>d"] = {
-            function()
-                vim.diagnostic.open_float { border = "rounded" }
-            end,
-            "Floating [d]iagnostic",
-        },
-
-        ["[d"] = {
-            function()
-                vim.diagnostic.goto_prev { float = { border = "rounded" } }
-            end,
-            "Goto prev",
-        },
-
-        ["]d"] = {
-            function()
-                vim.diagnostic.goto_next { float = { border = "rounded" } }
-            end,
-            "Goto next",
-        },
-    },
 }
 
 return M
