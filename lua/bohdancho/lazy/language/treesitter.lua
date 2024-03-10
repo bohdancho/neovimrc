@@ -13,6 +13,7 @@ return {
             multiline_threshold = 1, -- Maximum number of lines to show for a single context
         }
 
+        ---@diagnostic disable-next-line: missing-fields
         configs.setup {
             auto_install = true,
             highlight = {

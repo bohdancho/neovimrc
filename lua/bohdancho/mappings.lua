@@ -1,5 +1,6 @@
 local M = {}
 
+---@diagnostic disable-next-line: duplicate-doc-alias
 ---@alias ModuleName 'general'
 ---@type ModuleName
 local modules = {}
