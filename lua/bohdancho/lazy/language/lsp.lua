@@ -4,9 +4,9 @@ local capabilities =
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
         local bufnr = args.buf
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
 
         -- was necessary with none_ls (i think to prefer dedicated formatters to lsp formatting), idk if i need it with conform
+        -- local client = vim.lsp.get_client_by_id(args.data.client_id)
         -- client.server_capabilities.documentFormattingProvider = false
         -- client.server_capabilities.documentRangeFormattingProvider = false
 
