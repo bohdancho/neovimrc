@@ -15,7 +15,7 @@ return {
                     },
                 },
             }
-            vim.api.nvim_set_hl(0, "LazyGitBorder", { fg = "#303340" })
+            vim.api.nvim_set_hl(0, "LazyGitBorder", { link = "BohdanchoBorder" })
         end,
     },
     {

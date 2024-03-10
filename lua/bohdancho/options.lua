@@ -6,9 +6,16 @@ vim.opt.hlsearch = true
 vim.keymap.set("n", "<C-c>", "<cmd>nohlsearch<CR>")
 
 vim.opt.cursorline = true
-vim.opt.clipboard = "unnamed,unnamedplus" -- significantly slows down startup
 vim.opt.undofile = true
 vim.opt.swapfile = false
+
+vim.api.nvim_create_autocmd("User", {
+    pattern = "VeryLazy",
+    once = true,
+    callback = function()
+        vim.opt.clipboard = "unnamed,unnamedplus" -- lazy add because it significantly slows down startup otherwise
+    end,
+})
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
