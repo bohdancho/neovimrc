@@ -1,7 +1,5 @@
 return {
-
     "stevearc/conform.nvim",
-    deps = { "WhoIsSethDaniel/mason-tool-installer.nvim" },
     opts = {
         notify_on_error = false,
         format_on_save = function(bufnr)
