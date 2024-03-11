@@ -27,4 +27,4 @@ vim.keymap.set("i", "<C-k>", "<Up>", { desc = "Move up" })
 
 vim.keymap.set("t", "<C-x>", vim.api.nvim_replace_termcodes("<C-\\><C-N>", true, true, true), { desc = "Escape terminal mode" })
 
-vim.keymap.set("n", "<leader>cwc", "ysa'(ysa({acn<C-C><C-C>ll%hi,", { remap = true, desc = "[C]ode [W]rap with [c]n" })
+vim.keymap.set("n", "<leader>cwc", "sa'(sa({acn<C-C><C-C>l%i,<Space>", { remap = true, desc = "[C]ode [W]rap with [c]n" })
