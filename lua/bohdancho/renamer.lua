@@ -4,40 +4,7 @@
 -- credits to @Malace : https://www.reddit.com/r/neovim/comments/ql4iuj/rename_hover_including_window_title_and/
 -- This is modified version of the above snippet
 
-local M = {}
-local map = vim.keymap.set
-
-M.open = function()
-    local currName = vim.fn.expand "<cword>" .. " "
-
-    local win = require("plenary.popup").create(currName, {
-        style = "minimal",
-        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-        relative = "cursor",
-        borderhighlight = "BohdanchoBorder",
-        focusable = true,
-        width = 25,
-        height = 1,
-        line = "cursor+2",
-        col = "cursor-1",
-    })
-
-    vim.cmd "normal E"
-
-    map({ "n" }, "<C-c>", "<cmd>q<CR>", { buffer = 0 })
-    map({ "n" }, "q", "<cmd>q<CR>", { buffer = 0 })
-
-    map({ "n" }, "<C-s>", function()
-        M.apply(currName, win)
-        vim.cmd.stopinsert()
-    end, { buffer = 0 })
-    map({ "i", "n" }, "<CR>", function()
-        M.apply(currName, win)
-        vim.cmd.stopinsert()
-    end, { buffer = 0 })
-end
-
-M.apply = function(curr, win)
+local function apply(curr, win)
     local newName = vim.trim(vim.fn.getline ".")
     vim.api.nvim_win_close(win, true)
 
@@ -49,4 +16,38 @@ M.apply = function(curr, win)
     end
 end
 
-return M
+return {
+    open = function()
+        local currName = vim.fn.expand "<cword>"
+
+        local win = require("plenary.popup").create(currName, {
+            style = "minimal",
+            borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+            relative = "cursor",
+            borderhighlight = "BohdanchoBorder",
+            focusable = true,
+            width = 25,
+            height = 1,
+            line = "cursor+2",
+            col = "cursor-1",
+        })
+
+        local function map(mode, l, r, opts)
+            opts = opts or {}
+            opts.buffer = 0
+            vim.keymap.set(mode, l, r, opts)
+        end
+
+        map({ "n" }, "<C-c>", "<cmd>q<CR>")
+        map({ "n" }, "q", "<cmd>q<CR>")
+
+        map({ "n" }, "<C-s>", function()
+            apply(currName, win)
+            vim.cmd.stopinsert()
+        end)
+        map({ "i", "n" }, "<CR>", function()
+            apply(currName, win)
+            vim.cmd.stopinsert()
+        end)
+    end,
+}
