@@ -78,7 +78,6 @@ return {
     },
     {
         "tpope/vim-fugitive",
-        lazy = true,
         keys = {
             { "<leader>gd", "<cmd> Gvdiff <CR>", desc = "[G]it [D]iff" },
             { "<leader>gh", "<cmd> 0GcLog <CR>", desc = "[G]it file [H]istory" },
@@ -87,4 +86,5 @@ return {
             "G",
         },
     },
+    { "rhysd/git-messenger.vim", keys = { { "<leader>gm", desc = "[G]it [M]essenger" } } },
 }

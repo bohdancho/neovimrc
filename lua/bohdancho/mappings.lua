@@ -16,8 +16,9 @@ vim.keymap.set("n", "k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc 
 -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
 vim.keymap.set("v", "p", 'p:let @+=@0<CR>:let @"=@0<CR>', { desc = "Dont copy replaced text", silent = true })
 
--- Don't copy after changing with c+motion
+-- Don't copy
 vim.keymap.set("n", "c", '"_c')
+vim.keymap.set("n", "d", '"_d')
 
 -- navigate within insert mode
 vim.keymap.set("i", "<C-h>", "<Left>", { desc = "Move left" })

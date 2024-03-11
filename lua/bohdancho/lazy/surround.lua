@@ -3,13 +3,20 @@ return {
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
     opts = {
-        keymaps = { normal = "s" }, -- surround with `s` instead of `ys`
+        keymaps = { normal = "s", visual = "s", visual_line = "s" }, -- surround with `s` instead of `ys`
         aliases = {
             -- closing chars don't create whitespace, so alias opening chars to them
             ["<"] = ">",
             ["("] = ")",
             ["{"] = "}",
             ["["] = "]",
+        },
+        surrounds = {
+            ["f"] = {
+                add = function()
+                    return { { "<>" }, { "</>" } }
+                end,
+            },
         },
     },
 }
