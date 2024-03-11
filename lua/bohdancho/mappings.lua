@@ -1,3 +1,4 @@
+vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<C-h>", "<C-w>h")
 vim.keymap.set("n", "<C-l>", "<C-w>l")
 vim.keymap.set("n", "<C-j>", "<C-w>j")

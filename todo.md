@@ -9,8 +9,8 @@
 - [x] lazy add clipboard=unnamed,unnamedplus
 - [x] LazyGit open file in vim
 - [x] mason install
-- [ ] undo tree
-- [ ] vim-visual-multi
+- [x] undo tree
 - [ ] oil.nvim or files.mini
-- [ ] [Project-wide Find & Replace](https://www.reddit.com/r/neovim/comments/1aox1us/comment/kq2f6t8/?utm_source=share&utm_medium=web2x&context=3)
 - [ ] cmp popup and copilot suggestions linger after InsertLeave
+- [ ] [Project-wide Find & Replace](https://www.reddit.com/r/neovim/comments/1aox1us/comment/kq2f6t8/?utm_source=share&utm_medium=web2x&context=3)
+- [ ] vim-visual-multi
