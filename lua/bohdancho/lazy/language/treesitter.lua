@@ -34,15 +34,6 @@ return {
                         ["ic"] = "@class.inner",
                     },
                 },
-                swap = {
-                    enable = true,
-                    swap_next = {
-                        ["<leader>s"] = "@parameter.inner",
-                    },
-                    swap_previous = {
-                        ["<leader>S"] = "@parameter.inner",
-                    },
-                },
             },
         }
     end,

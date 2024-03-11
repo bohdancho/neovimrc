@@ -7,9 +7,10 @@
 - [x] lazy load todo-comments and add keymaps
 - [x] wrap with cn
 - [x] lazy add clipboard=unnamed,unnamedplus
-- [ ] [LazyGit usage; Project-wide Find & Replace](https://www.reddit.com/r/neovim/comments/1aox1us/comment/kq2f6t8/?utm_source=share&utm_medium=web2x&context=3)
-- [ ] LazyGit open file in vim
+- [x] LazyGit open file in vim
+- [ ] neogit to replace fugitive?
+- [ ] pin versions
+- [ ] [Project-wide Find & Replace](https://www.reddit.com/r/neovim/comments/1aox1us/comment/kq2f6t8/?utm_source=share&utm_medium=web2x&context=3)
 - [ ] cmp popup and copilot suggestions linger after InsertLeave
 - [ ] undo tree
 - [ ] vim-visual-multi
-- [ ] pin versions
