@@ -12,7 +12,7 @@ return {
             ["["] = "]",
         },
         surrounds = {
-            ["f"] = {
+            ["z"] = {
                 add = function()
                     return { { "<>" }, { "</>" } }
                 end,

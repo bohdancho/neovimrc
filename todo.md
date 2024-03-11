@@ -8,8 +8,7 @@
 - [x] wrap with cn
 - [x] lazy add clipboard=unnamed,unnamedplus
 - [x] LazyGit open file in vim
-- [ ] neogit to replace fugitive?
-- [ ] [Project-wide Find & Replace](https://www.reddit.com/r/neovim/comments/1aox1us/comment/kq2f6t8/?utm_source=share&utm_medium=web2x&context=3)
-- [ ] cmp popup and copilot suggestions linger after InsertLeave
 - [ ] undo tree
 - [ ] vim-visual-multi
+- [ ] [Project-wide Find & Replace](https://www.reddit.com/r/neovim/comments/1aox1us/comment/kq2f6t8/?utm_source=share&utm_medium=web2x&context=3)
+- [ ] cmp popup and copilot suggestions linger after InsertLeave

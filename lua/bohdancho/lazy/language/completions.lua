@@ -93,7 +93,13 @@ return {
         }
         config.mapping = {
             ["<C-Space>"] = cmp.mapping.complete(),
-            ["<C-y>"] = cmp.mapping.confirm { select = true },
+            ["<C-y>"] = cmp.mapping(function()
+                if cmp.visible() then
+                    cmp.confirm { select = true }
+                else
+                    require("luasnip").jump(1)
+                end
+            end),
             ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
             ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
             ["<C-u>"] = cmp.mapping.scroll_docs(-4),
