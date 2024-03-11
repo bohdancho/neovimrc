@@ -10,7 +10,8 @@
 - [x] LazyGit open file in vim
 - [x] mason install
 - [x] undo tree
-- [ ] oil.nvim or files.mini
-- [ ] cmp popup and copilot suggestions linger after InsertLeave
+- [x] oil.nvim or files.mini
+- [x] cmp popup and copilot suggestions linger after InsertLeave
+- [ ] better rfc snippet
 - [ ] [Project-wide Find & Replace](https://www.reddit.com/r/neovim/comments/1aox1us/comment/kq2f6t8/?utm_source=share&utm_medium=web2x&context=3)
 - [ ] vim-visual-multi
