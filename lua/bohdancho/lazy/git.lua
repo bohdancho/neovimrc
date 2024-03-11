@@ -81,6 +81,7 @@ return {
         keys = {
             { "<leader>gd", "<cmd> Gvdiff <CR>", desc = "[G]it [D]iff" },
             { "<leader>gh", "<cmd> 0GcLog <CR>", desc = "[G]it file [H]istory" },
+            { "<leader>gf", "<cmd> G <CR>", desc = "[G]it [F]ugitive" },
         },
         cmd = {
             "G",
