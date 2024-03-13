@@ -1,4 +1,3 @@
-- [ ] add gx remap to open links
 - [ ] only run eslint if has .eslint config
 - [ ] ts tools lsp with keymaps (organize imports)
 - [ ] text objects self closing jsx

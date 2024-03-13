@@ -4,6 +4,7 @@ vim.keymap.set("n", "<C-l>", "<C-w>l")
 vim.keymap.set("n", "<C-j>", "<C-w>j")
 vim.keymap.set("n", "<C-k>", "<C-w>k")
 vim.keymap.set("n", "<leader>q", "<C-w>q")
+vim.keymap.set("n", "gx", "<cmd>!xdg-open <cWORD><cr>")
 
 vim.keymap.set("n", "<C-s>", "<cmd>w<CR>", { desc = "Save file" })
 vim.keymap.set({ "i", "v" }, "<C-s>", "<Esc> <cmd>w<CR>l", { desc = "Save file" })
