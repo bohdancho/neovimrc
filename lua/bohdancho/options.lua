@@ -5,6 +5,8 @@ vim.opt.fillchars = { eob = " " }
 vim.opt.hlsearch = true
 vim.keymap.set("n", "<C-c>", "<cmd>nohlsearch<CR>")
 
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
 vim.opt.cursorline = true
 vim.opt.undofile = true
 vim.opt.swapfile = false

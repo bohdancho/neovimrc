@@ -1,17 +1,8 @@
-- [x] border tokyo
-- [x] adopt smth from kickstart
-  - [x] C+y to accept completion
-  - [x] should I ditch null_ls (aka none_ls)?
-  - [x] telescope open most recent
-- [x] fix emmet
-- [x] lazy load todo-comments and add keymaps
-- [x] wrap with cn
-- [x] lazy add clipboard=unnamed,unnamedplus
-- [x] LazyGit open file in vim
-- [x] mason install
-- [x] undo tree
-- [x] oil.nvim or files.mini
-- [x] cmp popup and copilot suggestions linger after InsertLeave
-- [ ] better rfc snippet
+- [ ] add gx remap to open links
+- [ ] only run eslint if has .eslint config
+- [ ] ts tools lsp with keymaps (organize imports)
+- [ ] text objects self closing jsx
+- [ ] better rfc snippet (luasnip?)
+- [ ] [mini.files](https://www.reddit.com/r/neovim/s/cHNGz8iwxI)
 - [ ] [Project-wide Find & Replace](https://www.reddit.com/r/neovim/comments/1aox1us/comment/kq2f6t8/?utm_source=share&utm_medium=web2x&context=3)
 - [ ] vim-visual-multi
