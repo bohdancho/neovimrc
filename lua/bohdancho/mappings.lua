@@ -1,4 +1,4 @@
-vim.keymap.set("i", "<C-c>", "<Esc>")
+vim.keymap.set("i", "<C-c>", "<Esc>l")
 vim.keymap.set("n", "<C-h>", "<C-w>h")
 vim.keymap.set("n", "<C-l>", "<C-w>l")
 vim.keymap.set("n", "<C-j>", "<C-w>j")
@@ -6,8 +6,8 @@ vim.keymap.set("n", "<C-k>", "<C-w>k")
 vim.keymap.set("n", "<leader>q", "<C-w>q")
 vim.keymap.set("n", "gx", "<cmd>!xdg-open <cWORD><cr>")
 
-vim.keymap.set("n", "<C-s>", "<cmd>w<CR>", { desc = "Save file" })
-vim.keymap.set({ "i", "v" }, "<C-s>", "<Esc> <cmd>w<CR>l", { desc = "Save file" })
+vim.keymap.set("n", "<C-s>", "<cmd>write<CR>", { desc = "Save file" })
+vim.keymap.set({ "i", "v" }, "<C-s>", "<Esc> <cmd>write<CR>", { desc = "Save file" })
 
 -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
 -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/

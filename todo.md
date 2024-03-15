@@ -1,3 +1,7 @@
+- [ ] mini.ai
+- [ ] [give neogit a 2nd chance](https://youtu.be/K-FKqXj8BAQ?si=Cib9z0amymk03kr5)
+- [ ] ts autoclose tag??
+- [ ] harpoon-lualine
 - [ ] only run eslint if has .eslint config
 - [ ] ts tools lsp with keymaps (organize imports)
 - [ ] text objects self closing jsx
