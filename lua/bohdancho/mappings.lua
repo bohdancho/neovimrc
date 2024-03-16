@@ -20,8 +20,11 @@ vim.keymap.set("n", "k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc 
 vim.keymap.set("v", "p", 'p:let @+=@0<CR>:let @"=@0<CR>', { desc = "Dont copy replaced text", silent = true })
 
 -- Don't copy
-vim.keymap.set("n", "c", '"_c')
-vim.keymap.set("n", "d", '"_d')
+vim.keymap.set("n", "c", '"_c', { noremap = true })
+vim.keymap.set("n", "C", '"_C', { noremap = true })
+vim.keymap.set("n", "d", '"_d', { noremap = true })
+vim.keymap.set("n", "D", '"_D', { noremap = true })
+vim.keymap.set("n", "S", '"_S', { noremap = true })
 
 vim.keymap.set("i", "<C-h>", "<Left>", { desc = "Move left" })
 vim.keymap.set("i", "<C-l>", "<Right>", { desc = "Move right" })
