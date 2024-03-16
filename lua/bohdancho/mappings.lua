@@ -16,10 +16,10 @@ vim.keymap.set("n", "j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { desc 
 vim.keymap.set("n", "k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc = "Move up", expr = true })
 
 -- Don't copy the replaced text after pasting in visual mode
--- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
-vim.keymap.set("v", "p", 'p:let @+=@0<CR>:let @"=@0<CR>', { desc = "Dont copy replaced text", silent = true })
+vim.keymap.set("v", "p", "P", { desc = "Dont copy replaced text" })
+vim.keymap.set("v", "P", "p", { desc = "Do copy replaced text" })
 
--- Don't copy
+-- Don't copy on delete
 vim.keymap.set("n", "d", '"_d', { noremap = true })
 vim.keymap.set("n", "D", '"_D', { noremap = true })
 
