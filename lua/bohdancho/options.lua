@@ -1,6 +1,7 @@
 vim.opt.relativenumber = true
 vim.opt.number = true
 vim.opt.fillchars = { eob = " " }
+vim.opt.scrolloff = 8
 
 vim.opt.hlsearch = true
 vim.keymap.set("n", "<C-c>", "<cmd>nohlsearch<CR>")
