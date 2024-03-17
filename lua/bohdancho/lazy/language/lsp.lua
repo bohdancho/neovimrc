@@ -41,6 +41,7 @@ return {
         "yioneko/nvim-vtsls",
         "nvim-lua/plenary.nvim", -- used for bohdancho.renamer
         "ray-x/lsp_signature.nvim",
+        "nvim-treesitter/nvim-treesitter-angular",
     },
     config = function()
         -- set default server config, optional but recommended
@@ -101,6 +102,7 @@ return {
                     tailwindCSS = { experimental = { classRegex = { { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" } } } },
                 },
             },
+            angularls = {},
         }
 
         local ensure_installed = vim.tbl_keys(servers)
