@@ -103,6 +103,17 @@ return {
                 },
             },
             angularls = {},
+            gopls = {
+                settings = {
+                    gopls = {
+                        analyses = {
+                            unusedparams = true,
+                            unreachable = true,
+                        },
+                        staticcheck = true,
+                    },
+                },
+            },
         }
 
         local ensure_installed = vim.tbl_keys(servers)

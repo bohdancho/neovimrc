@@ -40,6 +40,7 @@ return {
             json = { "prettierd" },
             html = { "prettierd" },
             css = { "prettierd" },
+            go = { "gofmt" },
         },
     },
 }
