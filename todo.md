@@ -1,3 +1,4 @@
+- [ ] telescope don't exclude hidden files (only .gitignore)
 - [ ] eslint fix hotkey
 - [ ] mini.ai
 - [ ] [give neogit a 2nd chance](https://youtu.be/K-FKqXj8BAQ?si=Cib9z0amymk03kr5)
@@ -9,4 +10,3 @@
 - [ ] better rfc snippet (luasnip?)
 - [ ] [mini.files](https://www.reddit.com/r/neovim/s/cHNGz8iwxI)
 - [ ] [Project-wide Find & Replace](https://www.reddit.com/r/neovim/comments/1aox1us/comment/kq2f6t8/?utm_source=share&utm_medium=web2x&context=3)
-- [ ] vim-visual-multi
