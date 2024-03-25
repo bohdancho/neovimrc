@@ -3,7 +3,7 @@ return {
     lazy = true,
     keys = {
         -- toggle in terminal mode
-        { "<A-h>", "<cmd>ToggleTerm<cr>", mode = { "n", "t" } },
+        { "<M-h>", "<cmd>ToggleTerm<cr>", mode = { "n", "t" } },
     },
     config = function()
         require("toggleterm").setup()
