@@ -47,6 +47,7 @@
   "todo-comments.nvim": { "branch": "main", "commit": "833d8dd8b07eeda37a09e99460f72a02616935cb" },
   "toggleterm.nvim": { "branch": "main", "commit": "193786e0371e3286d3bc9aa0079da1cd41beaa62" },
   "tokyonight.nvim": { "branch": "main", "commit": "c025baf23b62f044eff1f4ef561c45de636f0e32" },
+  "tree-sitter-angular": { "branch": "main", "commit": "62179d7bbfb5fd8a8f7298495ac654d252a1bd52" },
   "trouble.nvim": { "branch": "main", "commit": "f1168feada93c0154ede4d1fe9183bf69bac54ea" },
   "undotree": { "branch": "master", "commit": "aa93a7e5890dbbebbc064cd22260721a6db1a196" },
   "vim-fugitive": { "branch": "master", "commit": "8d4e8d45385c63a0bf735fe1164772116bf0da0d" },
