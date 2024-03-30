@@ -43,7 +43,6 @@ return {
         vim.filetype.add {
             pattern = {
                 [".*%.component%.html"] = "angular.html", -- Sets the filetype to `angular.html` if it matches the pattern
-                [".*%.component%.ts"] = "angular", -- Sets the filetype to `angular` if it matches the pattern
             },
         }
 

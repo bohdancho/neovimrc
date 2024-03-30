@@ -8,7 +8,7 @@ return {
         config = function()
             require("mason-tool-installer").setup {
                 -- formatting and diagnostics
-                ensure_installed = { { "stylua" }, { "eslint_d" }, { "prettierd" } },
+                ensure_installed = { { "stylua" }, { "eslint_d" }, { "prettierd" }, { "sql-formatter" } },
             }
             vim.cmd "MasonToolsInstall"
         end,

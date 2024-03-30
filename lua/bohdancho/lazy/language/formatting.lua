@@ -41,6 +41,7 @@ return {
             html = { "prettierd" },
             css = { "prettierd" },
             go = { "gofmt" },
+            sql = { "sql_formatter" },
         },
     },
 }
