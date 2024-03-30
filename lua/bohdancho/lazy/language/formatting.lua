@@ -20,28 +20,33 @@ end, {
 return {
     "stevearc/conform.nvim",
     deps = { "WhoIsSethDaniel/mason-tool-installer.nvim" },
-    opts = {
-        notify_on_error = false,
-        format_on_save = function(bufnr)
-            if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-                return
-            end
-            return {
-                timeout_ms = 2000,
-                lsp_fallback = true,
-            }
-        end,
-        formatters_by_ft = {
-            lua = { "stylua" },
-            typescript = { "prettierd" },
-            typescriptreact = { "prettierd" },
-            javascript = { "prettierd" },
-            javascriptreact = { "prettierd" },
-            json = { "prettierd" },
-            html = { "prettierd" },
-            css = { "prettierd" },
-            go = { "gofmt" },
-            sql = { "sql_formatter" },
-        },
-    },
+    config = function()
+        require("conform").setup {
+            notify_on_error = false,
+            format_on_save = function(bufnr)
+                if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+                    return
+                end
+                return {
+                    timeout_ms = 2000,
+                    lsp_fallback = true,
+                }
+            end,
+            formatters_by_ft = {
+                lua = { "stylua" },
+                typescript = { "prettierd" },
+                typescriptreact = { "prettierd" },
+                javascript = { "prettierd" },
+                javascriptreact = { "prettierd" },
+                json = { "prettierd" },
+                html = { "prettierd" },
+                css = { "prettierd" },
+                go = { "gofmt" },
+                sql = { "sql_formatter" },
+            },
+        }
+        require("conform").formatters.sql_formatter = {
+            prepend_args = { "-c", vim.fn.expand "~/.config/sql-formatter.json" },
+        }
+    end,
 }
