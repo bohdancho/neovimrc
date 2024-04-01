@@ -11,6 +11,7 @@ return {
 
             delete = "sd",
             change = "sc",
+            change_line = "sC",
         },
         aliases = {
             -- closing chars don't create whitespace, so alias opening chars to them
@@ -18,6 +19,7 @@ return {
             ["("] = ")",
             ["{"] = "}",
             ["["] = "]",
+            ["q"] = '"',
         },
         surrounds = {
             ["z"] = {
