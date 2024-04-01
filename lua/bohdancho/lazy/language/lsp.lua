@@ -28,6 +28,43 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
+-- local function gopls_fix_imports(opts)
+--     opts = opts or {}
+--
+--     local util = require "lspconfig.util"
+--     local gopls_lsp_client = util.get_active_client_by_name(opts.bufnr, "gopls")
+--     if gopls_lsp_client == nil then
+--         return
+--     end
+--
+--     local bufnr = util.validate_bufnr(opts.bufnr or 0)
+--     gopls_lsp_client.request_sync("workspace/executeCommand", {
+--         command = "eslint.applyAllFixes",
+--         arguments = {
+--             {
+--                 uri = vim.uri_from_bufnr(bufnr),
+--                 version = vim.lsp.util.buf_versions[bufnr],
+--             },
+--         },
+--     }, nil, bufnr)
+-- end
+
+local gopls_organize_imports = function(bufnr)
+    local params = vim.lsp.util.make_range_params(nil, vim.lsp.util._get_offset_encoding(bufnr))
+    params.context = { only = { "source.organizeImports" } }
+
+    local result = vim.lsp.buf_request_sync(bufnr, "textDocument/codeAction", params, 3000)
+    for _, res in pairs(result or {}) do
+        for _, r in pairs(res.result or {}) do
+            if r.edit then
+                vim.lsp.util.apply_workspace_edit(r.edit, vim.lsp.util._get_offset_encoding(bufnr))
+            else
+                vim.lsp.buf.execute_command(r.command)
+            end
+        end
+    end
+end
+
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -106,6 +143,11 @@ return {
                 },
             },
             gopls = {
+                on_attach = function(_, bufnr)
+                    vim.keymap.set("n", "<leader>lf", function()
+                        gopls_organize_imports(bufnr)
+                    end, { buffer = bufnr, desc = "LSP: Gopls [F]ix imports" })
+                end,
                 settings = {
                     gopls = {
                         analyses = {
@@ -115,6 +157,11 @@ return {
                         staticcheck = true,
                     },
                 },
+            },
+            eslint = {
+                on_attach = function(_, bufnr)
+                    vim.keymap.set("n", "<leader>lf", "<cmd>EslintFixAll<CR>", { buffer = bufnr, desc = "LSP: Eslint[F]ixAll" })
+                end,
             },
         }
 
