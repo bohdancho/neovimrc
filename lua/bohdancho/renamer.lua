@@ -16,9 +16,27 @@ local function apply(curr, win)
     end
 end
 
+local function getNameUnderCursor()
+    local line = vim.api.nvim_get_current_line()
+    local col = vim.fn.col "."
+    local start_col, end_col = col, col
+
+    while start_col > 0 and line:sub(start_col, start_col):match "[%w$_]" do
+        start_col = start_col - 1
+    end
+
+    while end_col <= #line and line:sub(end_col, end_col):match "[%w$_]" do
+        end_col = end_col + 1
+    end
+
+    local identifier = line:sub(start_col + 1, end_col - 1)
+    return identifier
+end
+
 return {
     open = function()
-        local currName = vim.fn.expand "<cword>"
+        vim.print "Renaming..."
+        local currName = getNameUnderCursor() -- can't just use <cword> because it doesn't include $
 
         local win = require("plenary.popup").create(currName, {
             style = "minimal",

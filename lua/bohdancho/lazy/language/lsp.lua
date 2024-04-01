@@ -5,11 +5,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
         local bufnr = args.buf
 
-        -- was necessary with none_ls (i think to prefer dedicated formatters to lsp formatting), idk if i need it with conform
-        -- local client = vim.lsp.get_client_by_id(args.data.client_id)
-        -- client.server_capabilities.documentFormattingProvider = false
-        -- client.server_capabilities.documentRangeFormattingProvider = false
-
         require("lsp_signature").on_attach({}, bufnr)
 
         local map = function(keys, func, desc)
@@ -70,6 +65,15 @@ return {
                     },
                 },
             },
+            angularls = {
+                on_attach = function()
+                    -- both vtsls and angularls have renameProvider so disable it for vtsls
+                    local vtsls_client = vim.lsp.get_clients({ name = "vtsls" })[1]
+                    if vtsls_client ~= nil then
+                        vtsls_client.server_capabilities.renameProvider = false
+                    end
+                end,
+            },
             vtsls = {},
             emmet_ls = {
                 on_attach = function(client, bufnr)
@@ -101,7 +105,6 @@ return {
                     tailwindCSS = { experimental = { classRegex = { { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" } } } },
                 },
             },
-            angularls = {},
             gopls = {
                 settings = {
                     gopls = {
