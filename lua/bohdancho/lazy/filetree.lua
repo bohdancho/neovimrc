@@ -6,7 +6,7 @@ return {
         {
             "-",
             function()
-                require("oil").open_float()
+                require("oil").open()
             end,
             desc = "Open file tree",
         },

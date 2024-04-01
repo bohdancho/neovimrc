@@ -4,7 +4,6 @@ return {
         "nvim-treesitter/nvim-treesitter-textobjects",
         "nvim-treesitter/nvim-treesitter-context",
         "dlvandenberg/tree-sitter-angular",
-        -- "nvim-treesitter/nvim-treesitter-angular",
     },
     lazy = false,
     build = ":TSUpdate",

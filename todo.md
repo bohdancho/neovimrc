@@ -1,5 +1,6 @@
+- [x] try out disabling clipboard unnamed (idiomatic vim way)
 - [ ] telescope don't exclude hidden files (only .gitignore)
-- [ ] eslint fix hotkey
+- [ ] eslint fix-all command mapping
 - [ ] mini.ai
 - [ ] [give neogit a 2nd chance](https://youtu.be/K-FKqXj8BAQ?si=Cib9z0amymk03kr5)
 - [ ] ts autoclose tag??
