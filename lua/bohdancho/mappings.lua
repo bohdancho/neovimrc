@@ -15,13 +15,13 @@ vim.keymap.set({ "i", "v" }, "<C-s>", "<Esc><cmd>w<CR>", { desc = "Save file" })
 vim.keymap.set("n", "j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { desc = "Move down", expr = true })
 vim.keymap.set("n", "k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc = "Move up", expr = true })
 
--- Don't copy the replaced text after pasting in visual mode
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>Y", [["+y$]])
+vim.keymap.set({ "n", "v" }, "<leader>p", [["+P]])
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
+
 vim.keymap.set("v", "p", "P", { desc = "Dont copy replaced text" })
 vim.keymap.set("v", "P", "p", { desc = "Do copy replaced text" })
-
--- Don't copy on delete
-vim.keymap.set("n", "d", '"_d', { noremap = true })
-vim.keymap.set("n", "D", '"_D', { noremap = true })
 vim.keymap.set("n", "x", '"_x', { noremap = true })
 
 vim.keymap.set("i", "<C-h>", "<Left>", { desc = "Move left" })
