@@ -111,7 +111,16 @@ return {
                     end
                 end,
             },
-            vtsls = {},
+            vtsls = {
+                on_attach = function(_, bufnr)
+                    vim.keymap.set(
+                        "n",
+                        "<leader>lq",
+                        [[<cmd>cexpr systemlist('bunx tsc | grep -o "src/[^\(]*" | sed "s/$/:0:0/" | uniq')<cr><cmd>copen<cr>]],
+                        { buffer = bufnr, desc = "LSP: tsc [q]uickfix" }
+                    )
+                end,
+            },
             emmet_ls = {
                 on_attach = function(client, bufnr)
                     vim.keymap.set("i", "<C-e>", function()
@@ -133,7 +142,7 @@ return {
                             vim.lsp.util.apply_text_edits({ textEdit }, bufnr, client.offset_encoding)
                             require("luasnip").lsp_expand(snip_string)
                         end, bufnr)
-                    end)
+                    end, { buffer = bufnr, desc = "LSP: Emmet autocomplete" })
                 end,
             },
             tailwindcss = {
@@ -163,6 +172,7 @@ return {
                     vim.keymap.set("n", "<leader>lf", "<cmd>EslintFixAll<CR>", { buffer = bufnr, desc = "LSP: Eslint[F]ixAll" })
                 end,
             },
+            pyright = {},
         }
 
         local ensure_installed = vim.tbl_keys(servers)
