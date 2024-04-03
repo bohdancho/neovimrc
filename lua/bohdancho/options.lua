@@ -11,6 +11,7 @@ vim.opt.tabstop = 4
 vim.opt.cursorline = true
 vim.opt.undofile = true
 vim.opt.swapfile = false
+vim.opt.guicursor = "n-v-c-i:block"
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
