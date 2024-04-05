@@ -19,6 +19,14 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+y$]])
 vim.keymap.set({ "n", "v" }, "<leader>p", [["+P]])
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
+-- Put the contents of main yank register to the system clipboard one
+-- don't yank anything new, just use :let @+ = @"
+vim.keymap.set(
+    "n",
+    "<leader>fy",
+    [[<cmd>let @+ = @"<CR>]],
+    { desc = "[f]ix [y]ank - Copy from main yank register to the system clipboard one" }
+)
 
 vim.keymap.set("v", "p", "P", { desc = "Dont copy replaced text" })
 vim.keymap.set("v", "P", "p", { desc = "Do copy replaced text" })
