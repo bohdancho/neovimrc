@@ -10,3 +10,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         vim.highlight.on_yank()
     end,
 })
+
+vim.api.nvim_create_user_command("Cpstuff", function()
+    vim.cmd "silent! !git add ."
+    vim.cmd "silent! !git commit -m 'doing stuff'"
+    vim.cmd "silent! !git push"
+end, {
+    desc = 'Commit and push all changes with commit name "doing stuff"',
+    bang = true,
+})
