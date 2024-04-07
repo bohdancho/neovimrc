@@ -14,7 +14,8 @@ vim.keymap.set("n", "k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc 
 
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+y$]])
-vim.keymap.set({ "n", "v" }, "<leader>p", [["+P]])
+vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]])
+vim.keymap.set({ "n", "v" }, "<leader>P", [["+P]])
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 -- Put the contents of main yank register to the system clipboard one
 -- don't yank anything new, just use :let @+ = @"
