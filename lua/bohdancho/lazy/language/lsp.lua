@@ -28,27 +28,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
--- local function gopls_fix_imports(opts)
---     opts = opts or {}
---
---     local util = require "lspconfig.util"
---     local gopls_lsp_client = util.get_active_client_by_name(opts.bufnr, "gopls")
---     if gopls_lsp_client == nil then
---         return
---     end
---
---     local bufnr = util.validate_bufnr(opts.bufnr or 0)
---     gopls_lsp_client.request_sync("workspace/executeCommand", {
---         command = "eslint.applyAllFixes",
---         arguments = {
---             {
---                 uri = vim.uri_from_bufnr(bufnr),
---                 version = vim.lsp.util.buf_versions[bufnr],
---             },
---         },
---     }, nil, bufnr)
--- end
-
 local gopls_organize_imports = function(bufnr)
     local params = vim.lsp.util.make_range_params(nil, vim.lsp.util._get_offset_encoding(bufnr))
     params.context = { only = { "source.organizeImports" } }
