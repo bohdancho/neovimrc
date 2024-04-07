@@ -56,13 +56,7 @@ return {
             vim.keymap.set(mode, l, r, opts)
         end
 
-        map({ "n" }, "<C-c>", "<cmd>q<CR>")
         map({ "n" }, "q", "<cmd>q<CR>")
-
-        map({ "n" }, "<C-s>", function()
-            apply(currName, win)
-            vim.cmd.stopinsert()
-        end)
         map({ "i", "n" }, "<CR>", function()
             apply(currName, win)
             vim.cmd.stopinsert()

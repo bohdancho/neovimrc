@@ -13,7 +13,6 @@ return {
     },
     opts = {
         keymaps = {
-            ["<C-s>"] = false,
             ["q"] = "actions.close",
         },
         view_options = {
