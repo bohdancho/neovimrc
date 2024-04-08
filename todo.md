@@ -1,11 +1,4 @@
-- [x] try out disabling clipboard unnamed (idiomatic vim way)
-    - [x] leader p, leader y
-- [x] angular renamer conflict
-- [x] renamer cword $  "hehe"
-- [x] telescope don't exclude hidden files (only .gitignore)
-- [x] eslint fix-all command mapping
-- [x] gopls fix imports mapping
-- [x] mini.ai
+- [ ] better ignore rules with telescope find word/file (.gitignore, node_modules, .git...)
 - [ ] [give neogit a 2nd chance](https://youtu.be/K-FKqXj8BAQ?si=Cib9z0amymk03kr5)
 - [ ] ts autoclose tag??
 - [ ] only run eslint if has .eslint config
