@@ -12,6 +12,7 @@ return {
         },
         filetypes = {
             go = false,
+            rust = false,
         },
     },
     config = function(_, opts)
