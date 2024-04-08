@@ -52,6 +52,12 @@ return {
         "yioneko/nvim-vtsls",
         "nvim-lua/plenary.nvim", -- used for bohdancho.renamer
         "ray-x/lsp_signature.nvim",
+        {
+            "mrcjkb/rustaceanvim",
+            version = "^4", -- Recommended
+            ft = { "rust" },
+            keys = { { "<leader>rr", "<cmd>RustRun<cr>", desc = "[R]ust [R]un" } },
+        },
     },
     config = function()
         -- set default server config, optional but recommended
@@ -152,7 +158,6 @@ return {
                 end,
             },
             pyright = {},
-            rust_analyzer = {},
         }
 
         local ensure_installed = vim.tbl_keys(servers)
