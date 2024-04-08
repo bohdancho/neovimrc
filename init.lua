@@ -19,17 +19,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     { import = "bohdancho.lazy" },
     { import = "bohdancho.lazy.language" },
-    {
-        "ThePrimeagen/vim-apm",
-        config = function()
-            local apm = require "vim-apm"
-
-            apm:setup {}
-            vim.keymap.set("n", "<leader>apm", function()
-                apm:toggle_monitor()
-            end)
-        end,
-    },
 }, {
     change_detection = {
         notify = false,
