@@ -3,6 +3,7 @@ return {
     dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
     lazy = true,
     keys = {
+        { "gcc" },
         { "gc", mode = { "n", "v" } },
         { "gb", mode = { "n", "v" } },
     },

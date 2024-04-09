@@ -56,7 +56,7 @@ return {
             "mrcjkb/rustaceanvim",
             version = "^4", -- Recommended
             ft = { "rust" },
-            keys = { { "<leader>rr", "<cmd>RustRun<cr>", desc = "[R]ust [R]un" } },
+            keys = { { "<leader>rr", "<cmd>Cargo run<cr>", desc = "[R]ust [R]un" } },
         },
     },
     config = function()

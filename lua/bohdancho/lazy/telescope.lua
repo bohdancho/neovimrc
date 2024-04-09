@@ -31,7 +31,6 @@ return {
             local telescope = require "telescope"
             telescope.setup {
                 defaults = {
-                    file_ignore_patterns = { "^./.git/", "^node_modules/" },
                     layout_strategy = "vertical",
                     layout_config = {
                         preview_cutoff = 0,
@@ -61,6 +60,7 @@ return {
                             end,
                         },
                     },
+                    file_ignore_patterns = { "%.git/" },
                 },
                 pickers = {
                     live_grep = {
