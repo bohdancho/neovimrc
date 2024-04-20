@@ -3,10 +3,6 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     event = "VeryLazy",
     config = function()
-        require("lualine").setup {
-            options = {
-                disabled_filetypes = { "NvimTree" },
-            },
-        }
+        require("lualine").setup {}
     end,
 }

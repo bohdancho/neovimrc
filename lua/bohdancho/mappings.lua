@@ -5,7 +5,8 @@ vim.keymap.set("n", "<C-j>", "<C-w>j")
 vim.keymap.set("n", "<C-k>", "<C-w>k")
 vim.keymap.set("n", "<leader>q", "<C-w>q")
 
--- insert a line break in normal mode
+-- insert a line break in normal mode, but not in quickfix list
+vim.cmd [[ autocmd FileType qf nnoremap <buffer> <CR> :cc <C-R>=line('.')<CR><CR> ]]
 vim.keymap.set("n", "<cr>", "i<cr><esc>")
 
 -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
