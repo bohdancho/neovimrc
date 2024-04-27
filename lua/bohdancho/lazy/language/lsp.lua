@@ -133,7 +133,14 @@ return {
             tailwindcss = {
                 settings = {
                     -- add autocomplete in unusual places for classes like cva
-                    tailwindCSS = { experimental = { classRegex = { { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" } } } },
+                    tailwindCSS = {
+                        experimental = {
+                            classRegex = {
+                                { "cn\\(([^)]*)\\)", "'([^']*)'" },
+                                { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+                            },
+                        },
+                    },
                 },
             },
             gopls = {
