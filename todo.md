@@ -1,9 +1,12 @@
+- [x] [Project-wide Find & Replace](https://www.reddit.com/r/neovim/comments/1aox1us/comment/kq2f6t8/?utm_source=share&utm_medium=web2x&context=3)
+    - now I just use telescope with `:cdo s/`
 - [ ] better ignore rules with telescope find word/file (.gitignore, node_modules, .git...)
 - [ ] [give neogit a 2nd chance](https://youtu.be/K-FKqXj8BAQ?si=Cib9z0amymk03kr5)
 - [ ] ts autoclose tag??
 - [ ] only run eslint if has .eslint config
 - [ ] ts tools lsp with keymaps (organize imports), code action with ts-ignore
-- [ ] better rfc snippet (luasnip?)
+- [ ] better react functional component snippet (luasnip?)
 - [ ] [mini.files](https://www.reddit.com/r/neovim/s/cHNGz8iwxI)
-- [ ] [Project-wide Find & Replace](https://www.reddit.com/r/neovim/comments/1aox1us/comment/kq2f6t8/?utm_source=share&utm_medium=web2x&context=3)
+- [ ] fix slow system clipboard
+- [ ] fix gx (open link)
 - [ ] try out copilot nvim plugin with chat?
