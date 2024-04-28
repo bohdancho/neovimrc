@@ -13,6 +13,14 @@ vim.opt.undofile = true
 vim.opt.swapfile = false
 vim.opt.guicursor = "n-v-c-i:block"
 
+vim.opt.conceallevel = 2
+vim.keymap.set(
+    "n",
+    "<leader>tc",
+    ":setlocal <C-R>=&conceallevel ? 'conceallevel=0' : 'conceallevel=2'<CR><CR>",
+    { desc = "[T]oggle [C]onceallevel" }
+)
+
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
