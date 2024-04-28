@@ -136,7 +136,7 @@ return {
                     tailwindCSS = {
                         experimental = {
                             classRegex = {
-                                { "cn\\(([^)]*)\\)", "'([^']*)'" },
+                                { "tw\\('([^']*)'\\)" }, -- TODO: add support for parens in the class name like calc()
                                 { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
                             },
                         },
