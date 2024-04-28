@@ -2,6 +2,7 @@
     - now I just use telescope with `:cdo s/`
 - [ ] `]t` `[t` to jump to next TODO
 - [ ] better ignore rules with telescope find word/file (.gitignore, node_modules, .git...)
+- [ ] [YankRing](https://github.com/vim-scripts/YankRing.vim)
 - [ ] [give neogit a 2nd chance](https://youtu.be/K-FKqXj8BAQ?si=Cib9z0amymk03kr5)
 - [ ] ts autoclose tag??
 - [ ] only run eslint if has .eslint config
