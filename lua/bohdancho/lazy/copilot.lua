@@ -16,6 +16,7 @@ return {
         },
     },
     config = function(_, opts)
-        require("copilot").setup(opts)
+        -- I don't want to use it for now
+        -- require("copilot").setup(opts)
     end,
 }
