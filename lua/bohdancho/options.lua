@@ -26,12 +26,12 @@ if is_wsl then
     vim.g.clipboard = {
         name = "win32yank-wsl",
         copy = {
-            ["+"] = "win32yank.exe -i --crlf",
-            ["*"] = "win32yank.exe -i --crlf",
+            ["+"] = "xclip -sel clip",
+            ["*"] = "xclip -sel clip",
         },
         paste = {
-            ["+"] = "win32yank.exe -o --lf",
-            ["*"] = "win32yank.exe -o --lf",
+            ["+"] = "xclip -o -sel clip",
+            ["*"] = "xclip -o -sel clip",
         },
         cache_enabled = 0,
     }

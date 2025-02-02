@@ -45,3 +45,10 @@ vim.keymap.set("n", "[q", "<cmd>cprevious<cr>", { desc = "Quickfix previous" })
 vim.keymap.set("n", "]q", "<cmd>cnext<cr>", { desc = "Quickfix next" })
 
 vim.keymap.set("n", "<leader>cwc", "sa'(sa({acn<C-C><C-C>l%i,<Space>", { remap = true, desc = "[C]ode [W]rap with [c]n" })
+
+vim.keymap.set(
+    "n",
+    "<leader>lq",
+    [[<cmd>cexpr systemlist('bunx tsc | grep -o "src/[^\(]*" | sed "s/$/:0:0/" | uniq')<cr><cmd>copen<cr>]],
+    { desc = "LSP: tsc [q]uickfix" }
+)

@@ -96,16 +96,7 @@ return {
                     end
                 end,
             },
-            vtsls = {
-                on_attach = function(_, bufnr)
-                    vim.keymap.set(
-                        "n",
-                        "<leader>lq",
-                        [[<cmd>cexpr systemlist('bunx tsc | grep -o "src/[^\(]*" | sed "s/$/:0:0/" | uniq')<cr><cmd>copen<cr>]],
-                        { buffer = bufnr, desc = "LSP: tsc [q]uickfix" }
-                    )
-                end,
-            },
+            vtsls = {},
             emmet_ls = {
                 on_attach = function(client, bufnr)
                     vim.keymap.set("i", "<C-e>", function()

@@ -41,8 +41,10 @@ return {
                 json = { "prettierd" },
                 html = { "prettierd" },
                 css = { "prettierd" },
+                scss = { "prettierd" },
                 go = { "gofmt" },
                 sql = { "sql_formatter" },
+                python = { "black" },
             },
         }
         require("conform").formatters.sql_formatter = {
