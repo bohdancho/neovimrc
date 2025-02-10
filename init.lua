@@ -21,6 +21,85 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+-- disable autocomments on new line
+vim.cmd "autocmd BufEnter * set formatoptions-=cro"
+vim.cmd "autocmd BufEnter * setlocal formatoptions-=cro"
+
+-- Highlight when yanking (copying) text
+vim.api.nvim_create_autocmd("TextYankPost", {
+    desc = "Highlight when yanking (copying) text",
+    group = vim.api.nvim_create_augroup("bohdancho-highlight-yank", { clear = true }),
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+})
+
+vim.keymap.set("n", "<C-h>", "<C-w>h")
+vim.keymap.set("n", "<C-l>", "<C-w>l")
+vim.keymap.set("n", "<C-j>", "<C-w>j")
+vim.keymap.set("n", "<C-k>", "<C-w>k")
+vim.keymap.set("n", "<leader>q", "<C-w>q")
+
+-- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
+-- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
+-- empty mode is same as using <cmd> :map
+-- also don't use g[j|k] when in operator pending mode, so it doesn't alter d, y or c behaviour
+vim.keymap.set("n", "j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { desc = "Move down", expr = true })
+vim.keymap.set("n", "k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc = "Move up", expr = true })
+
+vim.keymap.set("i", "<C-h>", "<Left>", { desc = "Move left" })
+vim.keymap.set("i", "<C-l>", "<Right>", { desc = "Move right" })
+vim.keymap.set("i", "<C-j>", "<Down>", { desc = "Move down" })
+vim.keymap.set("i", "<C-k>", "<Up>", { desc = "Move up" })
+
+vim.keymap.set("t", "<C-x>", vim.api.nvim_replace_termcodes("<C-\\><C-N>", true, true, true), { desc = "Escape terminal mode" })
+
+vim.keymap.set("n", "[q", "<cmd>cprevious<cr>", { desc = "Quickfix previous" })
+vim.keymap.set("n", "]q", "<cmd>cnext<cr>", { desc = "Quickfix next" })
+
+vim.keymap.set("n", "<leader>cwc", "sa'(sa({acn<C-C><C-C>l%i,<Space>", { remap = true, desc = "[C]ode [W]rap with [c]n" })
+
+vim.keymap.set(
+    "n",
+    "<leader>lq",
+    [[<cmd>cexpr systemlist('bunx tsc | grep -o "src/[^\(]*" | sed "s/$/:0:0/" | uniq')<cr><cmd>copen<cr>]],
+    { desc = "LSP: tsc [q]uickfix" }
+)
+
+vim.opt.relativenumber = true
+vim.opt.number = true
+vim.opt.fillchars = { eob = " " }
+vim.opt.scrolloff = 8
+
+vim.keymap.set("n", "<C-c>", "<cmd>nohlsearch<CR>")
+
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.undofile = true
+vim.opt.swapfile = false
+vim.opt.guicursor = "n-v-c-i:block"
+
+-- TODO: check if this works
+vim.opt.conceallevel = 2
+vim.keymap.set(
+    "n",
+    "<leader>tc",
+    ":setlocal <C-R>=&conceallevel ? 'conceallevel=0' : 'conceallevel=2'<CR><CR>",
+    { desc = "[T]oggle [C]onceallevel" }
+)
+
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+
+vim.opt.expandtab = true
+
+-- Preview substitutions live, as you type!
+vim.opt.inccommand = "split"
+
+-- ignore case unless there is a capital letter
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
 -- Setup lazy.nvim
 require("lazy").setup {
     spec = {
@@ -360,6 +439,8 @@ require("lazy").setup {
                 -- Useful status updates for LSP.
                 { "j-hui/fidget.nvim", opts = {} },
 
+                "L3MON4D3/LuaSnip",
+
                 -- Allows extra capabilities provided by nvim-cmp
                 -- "hrsh7th/cmp-nvim-lsp",
             },
@@ -510,7 +591,19 @@ require("lazy").setup {
                     -- gopls = {
                     --     on_attach = function(_, bufnr)
                     --         vim.keymap.set("n", "<leader>lf", function()
-                    --             gopls_organize_imports(bufnr)
+                    --             local params = vim.lsp.util.make_range_params(nil, vim.lsp.util._get_offset_encoding(bufnr))
+                    --             params.context = { only = { "source.organizeImports" } }
+                    --
+                    --             local result = vim.lsp.buf_request_sync(bufnr, "textDocument/codeAction", params, 3000)
+                    --             for _, res in pairs(result or {}) do
+                    --                 for _, r in pairs(res.result or {}) do
+                    --                     if r.edit then
+                    --                         vim.lsp.util.apply_workspace_edit(r.edit, vim.lsp.util._get_offset_encoding(bufnr))
+                    --                     else
+                    --                         vim.lsp.buf.execute_command(r.command)
+                    --                     end
+                    --                 end
+                    --             end
                     --         end, { buffer = bufnr, desc = "LSP: Gopls [F]ix imports" })
                     --     end,
                     --     settings = {
@@ -524,6 +617,18 @@ require("lazy").setup {
                     --     },
                     -- },
                     eslint = {
+                        filetypes = {
+                            "htmlangular",
+                            "javascript",
+                            "javascriptreact",
+                            "javascript.jsx",
+                            "typescript",
+                            "typescriptreact",
+                            "typescript.tsx",
+                            "vue",
+                            "svelte",
+                            "astro",
+                        },
                         on_attach = function(_, bufnr)
                             vim.keymap.set("n", "<leader>lf", "<cmd>EslintFixAll<CR>", { buffer = bufnr, desc = "LSP: Eslint[F]ixAll" })
                         end,
@@ -540,7 +645,6 @@ require("lazy").setup {
                     "black",
                     { "angularls", version = "18.2.0" }, -- v19 expects standalone: true default which breaks v18
                 })
-                vim.print(ensure_installed)
                 require("mason-tool-installer").setup { ensure_installed = ensure_installed }
 
                 require("mason-lspconfig").setup {
@@ -612,7 +716,7 @@ require("lazy").setup {
                         html = { "prettierd" },
                         css = { "prettierd" },
                         scss = { "prettierd" },
-                        go = { "gofmt" },
+                        -- go = { "gofmt" },
                         python = { "black" },
                     },
                 }
@@ -621,28 +725,65 @@ require("lazy").setup {
         {
             "saghen/blink.cmp",
             version = "*",
+            event = { "InsertEnter", "CmdlineEnter" },
+            dependencies = {
+                {
+                    "L3MON4D3/LuaSnip",
+                    dependencies = { "rafamadriz/friendly-snippets" },
+                    config = function()
+                        require("luasnip").config.set_config { history = true, updateevents = "TextChanged,TextChangedI" }
+
+                        -- vscode format
+                        require("luasnip.loaders.from_vscode").lazy_load()
+                        require("luasnip.loaders.from_vscode").lazy_load { paths = vim.g.vscode_snippets_path or "" }
+
+                        -- snipmate format
+                        require("luasnip.loaders.from_snipmate").load()
+                        require("luasnip.loaders.from_snipmate").lazy_load { paths = vim.g.snipmate_snippets_path or "" }
+
+                        -- lua format
+                        require("luasnip.loaders.from_lua").load()
+                        require("luasnip.loaders.from_lua").lazy_load { paths = vim.g.lua_snippets_path or "" }
+                    end,
+                },
+                "rafamadriz/friendly-snippets",
+            },
             opts = {
                 -- 'default' for mappings similar to built-in completion
                 -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
                 -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
                 -- See the full "keymap" documentation for information on defining your own keymap.
-                keymap = { preset = "default" },
+                snippets = { preset = "luasnip" },
+                keymap = {
+                    preset = "none",
+
+                    ["<Tab>"] = { "show" },
+                    ["<C-y>"] = { "select_and_accept" },
+                    ["<C-k>"] = { "select_prev", "fallback" },
+                    ["<C-j>"] = { "select_next", "fallback" },
+                    ["<C-u>"] = { "scroll_documentation_up", "fallback" },
+                    ["<C-d>"] = { "scroll_documentation_down", "fallback" },
+                },
+
+                completion = {
+                    documentation = { auto_show = true, auto_show_delay_ms = 500 },
+                    ghost_text = { enabled = true },
+                    menu = {
+                        auto_show = function(ctx)
+                            return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
+                        end,
+                    },
+                },
 
                 appearance = {
-                    -- Sets the fallback highlight groups to nvim-cmp's highlight groups
-                    -- Useful for when your theme doesn't support blink.cmp
-                    -- Will be removed in a future release
                     use_nvim_cmp_as_default = true,
-                    -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-                    -- Adjusts spacing to ensure icons are aligned
                     nerd_font_variant = "mono",
                 },
 
-                -- Default list of enabled providers defined so that you can extend it
-                -- elsewhere in your config, without redefining it, due to `opts_extend`
                 sources = {
-                    default = { "lsp", "path", "snippets", "buffer" },
+                    default = { "lsp", "path", "snippets" },
                 },
+                signature = { enabled = true },
             },
             opts_extend = { "sources.default" },
         },
@@ -650,82 +791,3 @@ require("lazy").setup {
     -- automatically check for plugin updates
     checker = { enabled = true },
 }
-
--- disable autocomments on new line
-vim.cmd "autocmd BufEnter * set formatoptions-=cro"
-vim.cmd "autocmd BufEnter * setlocal formatoptions-=cro"
-
--- Highlight when yanking (copying) text
-vim.api.nvim_create_autocmd("TextYankPost", {
-    desc = "Highlight when yanking (copying) text",
-    group = vim.api.nvim_create_augroup("bohdancho-highlight-yank", { clear = true }),
-    callback = function()
-        vim.highlight.on_yank()
-    end,
-})
-
-vim.keymap.set("n", "<C-h>", "<C-w>h")
-vim.keymap.set("n", "<C-l>", "<C-w>l")
-vim.keymap.set("n", "<C-j>", "<C-w>j")
-vim.keymap.set("n", "<C-k>", "<C-w>k")
-vim.keymap.set("n", "<leader>q", "<C-w>q")
-
--- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
--- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
--- empty mode is same as using <cmd> :map
--- also don't use g[j|k] when in operator pending mode, so it doesn't alter d, y or c behaviour
-vim.keymap.set("n", "j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { desc = "Move down", expr = true })
-vim.keymap.set("n", "k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc = "Move up", expr = true })
-
-vim.keymap.set("i", "<C-h>", "<Left>", { desc = "Move left" })
-vim.keymap.set("i", "<C-l>", "<Right>", { desc = "Move right" })
-vim.keymap.set("i", "<C-j>", "<Down>", { desc = "Move down" })
-vim.keymap.set("i", "<C-k>", "<Up>", { desc = "Move up" })
-
-vim.keymap.set("t", "<C-x>", vim.api.nvim_replace_termcodes("<C-\\><C-N>", true, true, true), { desc = "Escape terminal mode" })
-
-vim.keymap.set("n", "[q", "<cmd>cprevious<cr>", { desc = "Quickfix previous" })
-vim.keymap.set("n", "]q", "<cmd>cnext<cr>", { desc = "Quickfix next" })
-
-vim.keymap.set("n", "<leader>cwc", "sa'(sa({acn<C-C><C-C>l%i,<Space>", { remap = true, desc = "[C]ode [W]rap with [c]n" })
-
-vim.keymap.set(
-    "n",
-    "<leader>lq",
-    [[<cmd>cexpr systemlist('bunx tsc | grep -o "src/[^\(]*" | sed "s/$/:0:0/" | uniq')<cr><cmd>copen<cr>]],
-    { desc = "LSP: tsc [q]uickfix" }
-)
-
-vim.opt.relativenumber = true
-vim.opt.number = true
-vim.opt.fillchars = { eob = " " }
-vim.opt.scrolloff = 8
-
-vim.keymap.set("n", "<C-c>", "<cmd>nohlsearch<CR>")
-
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
-vim.opt.undofile = true
-vim.opt.swapfile = false
-vim.opt.guicursor = "n-v-c-i:block"
-
--- TODO: check if this works
-vim.opt.conceallevel = 2
-vim.keymap.set(
-    "n",
-    "<leader>tc",
-    ":setlocal <C-R>=&conceallevel ? 'conceallevel=0' : 'conceallevel=2'<CR><CR>",
-    { desc = "[T]oggle [C]onceallevel" }
-)
-
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-
-vim.opt.expandtab = true
-
--- Preview substitutions live, as you type!
-vim.opt.inccommand = "split"
-
--- ignore case unless there is a capital letter
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
