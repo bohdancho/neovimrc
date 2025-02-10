@@ -1,4 +1,3 @@
--- https://github.com/NvChad/ui/blob/v2.0/lua/nvchad/renamer.lua
 -- I took it from NvChad (they took it from Reddit) and tweaked it
 
 -- credits to @Malace : https://www.reddit.com/r/neovim/comments/ql4iuj/rename_hover_including_window_title_and/
