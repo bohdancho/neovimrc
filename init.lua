@@ -102,6 +102,10 @@ vim.opt.smartcase = true
 
 -- Setup lazy.nvim
 require("lazy").setup {
+    defaults = {
+        version = "*",
+    },
+    checker = { enabled = true },
     spec = {
         {
             "bullets-vim/bullets.vim",
@@ -113,10 +117,10 @@ require("lazy").setup {
             opts = {},
         },
         {
-            "folke/tokyonight.nvim",
+            "datsfilipe/vesper.nvim",
             priority = 1000,
             config = function()
-                vim.cmd.colorscheme "tokyonight-night"
+                vim.cmd.colorscheme "vesper"
                 vim.api.nvim_set_hl(0, "BohdanchoBorder", { bg = "NONE", fg = "#27a1b9" })
             end,
         },
@@ -781,7 +785,7 @@ require("lazy").setup {
                 },
 
                 sources = {
-                    default = { "lsp", "path", "snippets" },
+                    default = { "lsp", "path", "snippets", "buffer" },
                 },
                 signature = { enabled = true },
             },
