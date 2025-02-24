@@ -659,6 +659,7 @@ require("lazy").setup {
                     "prettierd",
                     "sql-formatter",
                     "black",
+                    "roslyn",
                     { "angularls", version = "18.2.0" }, -- v19 expects standalone: true default which breaks v18
                 })
                 require("mason-tool-installer").setup { ensure_installed = ensure_installed }
@@ -684,6 +685,11 @@ require("lazy").setup {
                     float = { border = border },
                 }
             end,
+        },
+        {
+            "seblyng/roslyn.nvim",
+            ft = "cs",
+            opts = {},
         },
 
         { -- Autoformat
