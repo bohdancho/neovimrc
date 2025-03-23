@@ -96,7 +96,11 @@ return {
                     end
                 end,
             },
-            vtsls = {},
+            vtsls = {
+                settings = {
+                    vtsls = { autoUseWorkspaceTsdk = true },
+                },
+            },
             emmet_ls = {
                 on_attach = function(client, bufnr)
                     vim.keymap.set("i", "<C-e>", function()

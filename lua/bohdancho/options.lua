@@ -24,14 +24,14 @@ vim.keymap.set(
 local is_wsl = vim.api.nvim_eval 'has("wsl")' == 1
 if is_wsl then
     vim.g.clipboard = {
-        name = "win32yank-wsl",
+        name = "WslClipboard",
         copy = {
-            ["+"] = "xclip -sel clip",
-            ["*"] = "xclip -sel clip",
+            ["+"] = "clip.exe",
+            ["*"] = "clip.exe",
         },
         paste = {
-            ["+"] = "xclip -o -sel clip",
-            ["*"] = "xclip -o -sel clip",
+            ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+            ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
         },
         cache_enabled = 0,
     }

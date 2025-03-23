@@ -5,9 +5,10 @@ return {
     build = ":Copilot auth",
     opts = {
         suggestion = {
-            auto_trigger = true,
+            -- auto_trigger = true,
             keymap = {
                 accept = "<C-p>",
+                next = "<C-n>",
             },
         },
         filetypes = {
@@ -17,6 +18,6 @@ return {
     },
     config = function(_, opts)
         -- I don't want to use it for now
-        -- require("copilot").setup(opts)
+        require("copilot").setup(opts)
     end,
 }
