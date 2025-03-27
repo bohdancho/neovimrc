@@ -423,53 +423,53 @@ require("lazy").setup {
             },
             opts = {},
         },
-        {
-            "nvim-treesitter/nvim-treesitter",
-            dependencies = {
-                "nvim-treesitter/nvim-treesitter-textobjects",
-                "nvim-treesitter/nvim-treesitter-context",
-                "dlvandenberg/tree-sitter-angular",
-            },
-            lazy = false,
-            build = ":TSUpdate",
-            config = function()
-                local configs = require "nvim-treesitter.configs"
-
-                require("treesitter-context").setup {
-                    multiline_threshold = 1, -- Maximum number of lines to show for a single context
-                }
-
-                ---@diagnostic disable-next-line: missing-fields
-                configs.setup {
-                    auto_install = true,
-                    highlight = {
-                        enable = true,
-                        disable = { "lua" },
-                    },
-                    indent = {
-                        enable = true,
-                    },
-                    textobjects = {
-                        select = {
-                            enable = true,
-                            lookahead = true,
-                            keymaps = {
-                                ["af"] = "@function.outer",
-                                ["if"] = "@function.inner",
-                                ["ac"] = "@class.outer",
-                                ["ic"] = "@class.inner",
-                            },
-                        },
-                    },
-                }
-
-                vim.filetype.add {
-                    pattern = {
-                        [".*%.component%.html"] = "htmlangular",
-                    },
-                }
-            end,
-        },
+        --{
+        --    "nvim-treesitter/nvim-treesitter",
+        --    dependencies = {
+        --        "nvim-treesitter/nvim-treesitter-textobjects",
+        --        "nvim-treesitter/nvim-treesitter-context",
+        --        "dlvandenberg/tree-sitter-angular",
+        --    },
+        --    lazy = false,
+        --    build = ":TSUpdate",
+        --    config = function()
+        --        local configs = require "nvim-treesitter.configs"
+        --
+        --                require("treesitter-context").setup {
+        --                    multiline_threshold = 1, -- Maximum number of lines to show for a single context
+        --                }
+        --
+        --                ---@diagnostic disable-next-line: missing-fields
+        --                configs.setup {
+        --                    auto_install = true,
+        --                    highlight = {
+        --                        enable = true,
+        --                        disable = { "lua" },
+        --                    },
+        --                    indent = {
+        --                        enable = true,
+        --                    },
+        --                    textobjects = {
+        --                        select = {
+        --                            enable = true,
+        --                            lookahead = true,
+        --                            keymaps = {
+        --                                ["af"] = "@function.outer",
+        --                                ["if"] = "@function.inner",
+        --                                ["ac"] = "@class.outer",
+        --                                ["ic"] = "@class.inner",
+        --                            },
+        --                        },
+        --                    },
+        --                }
+        --
+        --                vim.filetype.add {
+        --                    pattern = {
+        --                        [".*%.component%.html"] = "htmlangular",
+        --                    },
+        --                }
+        --            end,
+        --        },
 
         -- LSP
         {
@@ -736,35 +736,30 @@ require("lazy").setup {
             "saghen/blink.cmp",
             version = "*",
             event = { "InsertEnter", "CmdlineEnter" },
-            -- dependencies = {
-            --     {
-            --         "L3MON4D3/LuaSnip",
-            --         dependencies = { "rafamadriz/friendly-snippets" },
-            --         config = function()
-            --             require("luasnip").config.set_config { history = true, updateevents = "TextChanged,TextChangedI" }
-            --
-            --             -- vscode format
-            --             require("luasnip.loaders.from_vscode").lazy_load()
-            --             require("luasnip.loaders.from_vscode").lazy_load { paths = vim.g.vscode_snippets_path or "" }
-            --
-            --             -- snipmate format
-            --             require("luasnip.loaders.from_snipmate").load()
-            --             require("luasnip.loaders.from_snipmate").lazy_load { paths = vim.g.snipmate_snippets_path or "" }
-            --
-            --             -- lua format
-            --             require("luasnip.loaders.from_lua").load()
-            --             require("luasnip.loaders.from_lua").lazy_load { paths = vim.g.lua_snippets_path or "" }
-            --         end,
-            --     },
-            --     "rafamadriz/friendly-snippets",
-            -- },
+            dependencies = {
+                -- {
+                --     "L3MON4D3/LuaSnip",
+                --     dependencies = { "rafamadriz/friendly-snippets" },
+                --     config = function()
+                --         require("luasnip").config.set_config { history = true, updateevents = "TextChanged,TextChangedI" }
+                --
+                --         -- vscode format
+                --         require("luasnip.loaders.from_vscode").lazy_load()
+                --         require("luasnip.loaders.from_vscode").lazy_load { paths = vim.g.vscode_snippets_path or "" }
+                --
+                --         -- snipmate format
+                --         require("luasnip.loaders.from_snipmate").load()
+                --         require("luasnip.loaders.from_snipmate").lazy_load { paths = vim.g.snipmate_snippets_path or "" }
+                --
+                --         -- lua format
+                --         require("luasnip.loaders.from_lua").load()
+                --         require("luasnip.loaders.from_lua").lazy_load { paths = vim.g.lua_snippets_path or "" }
+                --     end,
+                -- },
+                "rafamadriz/friendly-snippets",
+            },
             opts = {
-                -- 'default' for mappings similar to built-in completion
-                -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
-                -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-                -- See the full "keymap" documentation for information on defining your own keymap.
                 -- snippets = { preset = "luasnip" },
-                snippets = { preset = "default" },
 
                 keymap = {
                     preset = "none",
@@ -786,17 +781,14 @@ require("lazy").setup {
                     },
                 },
 
-                appearance = {
-                    use_nvim_cmp_as_default = true,
-                    nerd_font_variant = "mono",
-                },
-
-                sources = {
-                    default = { "lsp", "path", "snippets", "buffer" },
-                },
                 signature = { enabled = true },
 
                 fuzzy = { implementation = "prefer_rust" },
+                cmdline = {
+                    completion = {
+                        menu = { auto_show = true },
+                    },
+                },
             },
             opts_extend = { "sources.default" },
         },
