@@ -451,7 +451,7 @@ require("lazy").setup {
                         disable = { "lua" },
                     },
                     indent = {
-                        enable = true,
+                        -- enable = true,
                     },
                     textobjects = {
                         select = {
@@ -844,5 +844,6 @@ require("lazy").setup {
                 -- refer to the configuration section below
             },
         },
+        { "windwp/nvim-autopairs", event = "InsertEnter", config = true },
     },
 }

@@ -1,7 +1,7 @@
 - [x] ts tools lsp with keymaps (remove unused imports, import all missing), code action with ts-ignore - using nvim/vtsls
 - [ ] better react functional component snippet (luasnip?)
-- [ ] ts autoclose tag?? / autopairs
-- [ ] toggle cloak
+- [x] ts autoclose tag?? / autopairs
+- [x] toggle cloak
 
 - [ ] only run eslint if has .eslint config
 - [ ] [mini.files](https://www.reddit.com/r/neovim/s/cHNGz8iwxI)
