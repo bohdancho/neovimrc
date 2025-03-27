@@ -61,9 +61,9 @@ vim.keymap.set("n", "<leader>cwc", "sa'(sa({acn<C-C><C-C>l%i,<Space>", { remap =
 
 vim.keymap.set(
     "n",
-    "<leader>lq",
+    "<leader>tq",
     [[<cmd>cexpr systemlist('bunx tsc | grep -o "src/[^\(]*" | sed "s/$/:0:0/" | uniq')<cr><cmd>copen<cr>]],
-    { desc = "LSP: tsc [q]uickfix" }
+    { desc = "[T]ypescript: [q]uickfix" }
 )
 
 vim.opt.relativenumber = true
@@ -117,6 +117,13 @@ require("lazy").setup {
             priority = 1000,
             lazy = false,
             opts = {},
+            keys = {
+                {
+                    "<leader>cc",
+                    "<cmd>CloakToggle<cr>",
+                    desc = "Cloak toggle",
+                },
+            },
         },
         {
             "folke/tokyonight.nvim",
@@ -478,6 +485,21 @@ require("lazy").setup {
 
                 -- Useful status updates for LSP.
                 { "j-hui/fidget.nvim", opts = {} },
+                {
+                    "yioneko/nvim-vtsls",
+                    keys = {
+                        {
+                            "<leader>ta",
+                            "<cmd>VtsExec add_missing_imports<cr>",
+                            desc = "[T]typescript [a]dd missing imports",
+                        },
+                        {
+                            "<leader>tr",
+                            "<cmd>VtsExec remove_unused_imports<cr>",
+                            desc = "[T]typescript [r]emove unused imports",
+                        },
+                    },
+                },
             },
             config = function()
                 vim.api.nvim_create_autocmd("LspAttach", {
@@ -643,7 +665,6 @@ require("lazy").setup {
                     },
                     pyright = {},
                 }
-
                 local ensure_installed = vim.tbl_keys(servers or {})
 
                 vim.list_extend(ensure_installed, {
@@ -813,6 +834,15 @@ require("lazy").setup {
                 },
             },
             opts = {},
+        },
+        {
+            "folke/which-key.nvim",
+            event = "VeryLazy",
+            opts = {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            },
         },
     },
 }

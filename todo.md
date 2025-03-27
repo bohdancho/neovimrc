@@ -1,4 +1,4 @@
-- [ ] ts tools lsp with keymaps (remove unused imports, import all missing), code action with ts-ignore - using nvim/vtsls
+- [x] ts tools lsp with keymaps (remove unused imports, import all missing), code action with ts-ignore - using nvim/vtsls
 - [ ] better react functional component snippet (luasnip?)
 - [ ] ts autoclose tag?? / autopairs
 - [ ] toggle cloak
