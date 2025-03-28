@@ -426,7 +426,7 @@ require("lazy").setup {
         {
             "akinsho/toggleterm.nvim",
             keys = {
-                { "<M-h>", "<cmd>ToggleTerm<cr>", mode = { "n", "t" } },
+                { "<M-h>", "<cmd>ToggleTerm size=20<cr>", mode = { "n", "t" } },
             },
             opts = {},
         },
@@ -751,6 +751,13 @@ require("lazy").setup {
             end,
         },
         {
+            "chrisgrieser/nvim-scissors",
+            dependencies = "nvim-telescope/telescope.nvim", -- if using telescope
+            opts = {
+                snippetDir = vim.fn.stdpath "config" .. "/snippets",
+            },
+        },
+        {
             "saghen/blink.cmp",
             version = "*",
             event = { "InsertEnter", "CmdlineEnter" },
@@ -773,13 +780,6 @@ require("lazy").setup {
                         -- require("luasnip.loaders.from_lua").load()
                         -- require("luasnip.loaders.from_lua").lazy_load { paths = vim.g.lua_snippets_path or "" }
                     end,
-                },
-                {
-                    "chrisgrieser/nvim-scissors",
-                    dependencies = "nvim-telescope/telescope.nvim", -- if using telescope
-                    opts = {
-                        snippetDir = vim.fn.stdpath "config" .. "/snippets",
-                    },
                 },
                 "rafamadriz/friendly-snippets",
             },
