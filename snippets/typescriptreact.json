@@ -1,0 +1,1 @@
+{"cln":{"body":"{ className }: { className?: string }","prefix":"cln"},"cld":{"prefix":"cld","body":"{ children }: { children: ReactNode }"},"rc":{"prefix":"rc","body":["export function ${1:ComponentName}() {","  return (","    ","  )","}"]}}

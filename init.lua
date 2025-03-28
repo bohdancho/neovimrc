@@ -600,7 +600,7 @@ require("lazy").setup {
                                     vim.fn.cursor(vim.fn.line ".", start_col)
                                     textEdit.newText = ""
                                     vim.lsp.util.apply_text_edits({ textEdit }, bufnr, client.offset_encoding)
-                                    require("luasnip").lsp_expand(snip_string)
+                                    vim.snippet.expand(snip_string)
                                 end, bufnr)
                             end, { buffer = bufnr, desc = "LSP: Emmet autocomplete" })
                         end,
@@ -755,29 +755,36 @@ require("lazy").setup {
             version = "*",
             event = { "InsertEnter", "CmdlineEnter" },
             dependencies = {
-                -- {
-                --     "L3MON4D3/LuaSnip",
-                --     dependencies = { "rafamadriz/friendly-snippets" },
-                --     config = function()
-                --         require("luasnip").config.set_config { history = true, updateevents = "TextChanged,TextChangedI" }
-                --
-                --         -- vscode format
-                --         require("luasnip.loaders.from_vscode").lazy_load()
-                --         require("luasnip.loaders.from_vscode").lazy_load { paths = vim.g.vscode_snippets_path or "" }
-                --
-                --         -- snipmate format
-                --         require("luasnip.loaders.from_snipmate").load()
-                --         require("luasnip.loaders.from_snipmate").lazy_load { paths = vim.g.snipmate_snippets_path or "" }
-                --
-                --         -- lua format
-                --         require("luasnip.loaders.from_lua").load()
-                --         require("luasnip.loaders.from_lua").lazy_load { paths = vim.g.lua_snippets_path or "" }
-                --     end,
-                -- },
+                {
+                    "L3MON4D3/LuaSnip",
+                    dependencies = { "rafamadriz/friendly-snippets" },
+                    config = function()
+                        require("luasnip").config.set_config { history = true, updateevents = "TextChanged,TextChangedI" }
+
+                        -- vscode format
+                        require("luasnip.loaders.from_vscode").lazy_load()
+                        require("luasnip.loaders.from_vscode").lazy_load { paths = vim.fn.stdpath "config" .. "/snippets" }
+
+                        -- -- snipmate format
+                        -- require("luasnip.loaders.from_snipmate").load()
+                        -- require("luasnip.loaders.from_snipmate").lazy_load { paths = vim.g.snipmate_snippets_path or "" }
+
+                        -- -- lua format
+                        -- require("luasnip.loaders.from_lua").load()
+                        -- require("luasnip.loaders.from_lua").lazy_load { paths = vim.g.lua_snippets_path or "" }
+                    end,
+                },
+                {
+                    "chrisgrieser/nvim-scissors",
+                    dependencies = "nvim-telescope/telescope.nvim", -- if using telescope
+                    opts = {
+                        snippetDir = vim.fn.stdpath "config" .. "/snippets",
+                    },
+                },
                 "rafamadriz/friendly-snippets",
             },
             opts = {
-                -- snippets = { preset = "luasnip" },
+                snippets = { preset = "luasnip" },
 
                 keymap = {
                     preset = "none",
@@ -801,10 +808,33 @@ require("lazy").setup {
 
                 signature = { enabled = true },
 
-                fuzzy = { implementation = "prefer_rust" },
+                fuzzy = {
+                    implementation = "prefer_rust",
+                    sorts = {
+                        function(a, b)
+                            if (a.client_name == nil or b.client_name == nil) or (a.client_name == b.client_name) then
+                                return
+                            end
+                            return b.client_name == "emmet_ls"
+                        end,
+                        -- default sorts
+                        "score",
+                        "sort_text",
+                    },
+                },
                 cmdline = {
                     completion = {
                         menu = { auto_show = true },
+                    },
+                    keymap = {
+                        preset = "none",
+
+                        ["<Tab>"] = { "show" },
+                        ["<C-y>"] = { "select_and_accept" },
+                        ["<C-k>"] = { "select_prev", "fallback" },
+                        ["<C-j>"] = { "select_next", "fallback" },
+                        ["<C-u>"] = { "scroll_documentation_up", "fallback" },
+                        ["<C-d>"] = { "scroll_documentation_down", "fallback" },
                     },
                 },
             },
